@@ -1,0 +1,95 @@
+div#game {
+	position:relative;
+	width:1280px;
+	height:720px;
+	background:#000;
+}
+
+div#character {
+	display:inline-block;
+	position:relative;
+	z-index:10;
+	top:4px;
+	left:4px;
+	width:500px;
+	height:300px;
+}
+
+div#charimage {
+	position:absolute;
+	width:100px;
+	height:100px;
+	background:url("../img/TechnoChimp-small.jpg");
+	border:solid 1px white;
+	color:white;
+}
+
+div#chartab {
+	display:none;
+	position:absolute;
+	width:100px;
+	height:198px;
+	left:0px;
+	bottom:0px;
+	border:solid 1px white;
+	background:#888;
+}
+
+div#charsheet {
+	display:none;
+	position:absolute;
+	width:396px;
+	height:298px;
+	right:0px;
+	border:solid 1px white;
+	background:#aaa;
+}
+
+div#stage {
+	position:absolute;
+	top:0;
+	left:0;
+	overflow:hidden;
+	width:1280px;
+	height:720px;
+	background:#000;
+}
+
+.city{
+	position:relative;
+	top:-360px;
+	left:-80px;
+	transform:rotateX(60deg) rotateZ(45deg);
+	border-spacing:0px;
+}
+
+.city tr {
+	width:0px;
+	height:0px;
+}
+
+.city td {
+	width:0px;
+	height:0px;
+	padding:0px;
+}
+
+.tile {
+	transform:rotateX(0deg);
+	width:90px;
+	height:90px;
+}
+
+.tile>div {
+	transform:rotateZ(-45deg) rotateY(-60deg);
+	width:256px;
+	height:256px;
+	
+}
+
+div.tilexx{background:url('../img/iso.png') -768px -0px;background-size:1000%;position:relative;top:-128px;left:-128px;}
+div.tile00{background:url('../img/iso2.png') -0px -0px;background-size:500%;position:relative;top:-58px;left:-58px;}
+div.tile01{background:url('../img/iso2.png') -256px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
+div.tile02{background:url('../img/iso2.png') -512px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
+div.tile03{background:url('../img/iso2.png') -768px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
+div.tile04{background:url('../img/iso2.png') -1024px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
