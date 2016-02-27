@@ -1,0 +1,69 @@
+<link href="css/game.css" rel="stylesheet" type="text/css">
+
+<h2>Game</h2>
+<div id="game">
+	<div id="game_ui">
+		<div id="character">
+			<div id="charimage">
+				
+			</div>
+			<div id="chartab">
+				
+			</div>
+			<div id="charsheet">
+	
+			</div>
+		</div>
+	</div>
+	<div id="stage">
+		<p style="color:white;">Test</p>
+	</div>
+</div>
+
+<script src='js/stageCity.js'></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('#charimage').click(function() {
+			$('#chartab').toggle();
+			$('#charsheet').toggle();
+			
+			//Move me inside a stat tab.
+			jQuery.ajax({
+				url: "../backend/api/character",
+				type: "GET",
+				
+				contentType: 'application/json; charset=utf-8',
+				success: function(resultData) {
+					
+					var output="<ul>";
+					output+="<li>Name: " + resultData.name + "</li>";
+					output+="<li>Stat1: " + resultData.stat1 + "</li>";
+					output+="<li>Stat2: " + resultData.stat2 + "</li>";
+					output+="<li>Stat3: " + resultData.stat3 + "</li>";
+					output+="<li>Stat4: " + resultData.stat4 + "</li>";
+					output+="<li>Stat5: " + resultData.stat5 + "</li>";
+					output+="<li>Stat6: " + resultData.stat6 + "</li>";
+					output+="</ul>";
+					
+					$('#charsheet').html(output);
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+				},
+				
+				timeout: 120000,
+			});
+			
+		});
+		
+		stageCity();
+		$('#stage').click(function (e) {
+			console.log('X: ' + e.pageX);
+			console.log('Y: ' + e.pageY);
+			console.log('x/45: ' + e.pageX/45);
+			console.log('y/45: ' + e.pageY/45);
+		});
+		
+		
+	});
+</script>

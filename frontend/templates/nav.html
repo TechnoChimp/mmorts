@@ -1,0 +1,101 @@
+<link href="css/menu.css" rel="stylesheet" type="text/css" media="screen" />
+
+<ul id="menu">
+	<li><a class="navlink" pageId="home" href="#">Home</a></li>
+    <li><a href="#" class="drop">About</a>
+		
+		<div class="dropdown_2columns">
+			
+			<div class="col_2">
+				<h2>This is some links</h2>
+			</div>
+			
+			<div class="col_1">
+				<h3>Some Links</h3>
+				<ul>
+					<li><a href="#">Sub-Item 1</a></li>
+				</ul>
+			</div>
+			
+			<div class="col_1">
+				<h3> Some Other Links</h3>
+				<ul>
+					<li><a href="#">Sub-Item10</a></li>
+				</ul>
+			</div>
+			
+		</div>
+	
+	</li>
+	<li><a href="#" class="drop">Services</a>
+		
+		<div class="dropdown_2columns">
+			
+			<div class="col_2">
+				<h3>Some Text</h3>
+			</div>
+			
+			<div class="col_1">
+				<a class="navlink" pageId="game" href="#">Game</a>
+			</div>
+			
+			<div class="col_1">
+				<p>Sample text 2.</p>
+			</div>
+			
+		</div>
+		
+	</li>
+	<li><a href="#">Portfolio</a></li>
+	<li class="menu_right"><a href="#" class="drop">Login/Register</a>
+		<div class="dropdown_2columns align_right">
+			
+			<div class="col_2">
+				<h3>Login</h3>				
+			</div>
+			
+			<div class="col_2">
+				
+				<form id="loginform" action="login.php" autocomplete="on">
+					<p class="col_2">
+						<label for="username">Username:</label>
+						<input type="text" id="username" />
+					</p>
+					<p class="col_2">
+						<label for="password">Password:</label>
+						<input type="password" id="password" />
+					</p>
+					<a class="col_1 navlink" pageId="forgot" href="#">Forgot Password?</a>
+					<p class="col_1">
+						<input type="submit" id="login" value="Login" />
+						
+					</p>
+			<div class="col_2">
+				<h3>Register</h3>
+			</div>
+			<div class="col_1">
+				<p class="col_1">
+					<a class="col_1 navlink" pageId="register" href="#">Register</a>
+				</p>
+			</div>
+
+					
+					
+					
+					
+				</form>
+
+			</div>
+		</div>
+	</li>
+</ul>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('.navlink').click(function() {
+			var pageId = $(this).attr('pageId');
+			$('#content').load('pages/'+pageId+'.html');
+		});
+	});
+</script>

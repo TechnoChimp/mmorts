@@ -1,0 +1,61 @@
+<h2>Register</h2>
+<div class="block font-right">
+	<form id="registerform" autocomplete="off" onsubmit="">
+		<p>
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" />
+		</p>
+		<p>
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" />
+		</p>
+		<p>
+			<label for="confirm">Confirm Password:</label>
+			<input type="password" id="confirm" name="confirmpassword" />
+		</p>
+		<p>
+			<label for="password">Email Address:</label>
+			<input type="email" id="email" name="email" />
+		</p>
+			<button id="register">Register</button>
+
+	</form>
+</div>
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+		$('#register').click(function(e) {
+			//Disable posting form data to webpage
+			e.preventDefault();
+			
+			//Gather form data and format it into JSON
+			var formdata = $('#registerform').serializeArray();
+			var jsondata = {};
+			
+			jQuery.each(formdata, function() {
+				jsondata[this.name] = this.value || '';
+			});
+			
+			jsondata = JSON.stringify(jsondata);
+			
+			console.log(jsondata);	
+			$.ajax({
+				url: "../backend/api/register",
+				type: "POST",
+				data: jsondata,
+				success: function(resultdata)
+				{
+					$('#content').load('pages/registersuccess.html');
+				},
+				error: function(resultdata)
+				{
+					console.log(resultdata);
+				}
+			});
+			
+		});
+	});
+	
+</script>

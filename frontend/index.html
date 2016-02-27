@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MMORTS - Work In Progress</title>
+		<link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="header" id="header">
+			</div>
+			<div class="nav" id="nav">
+			</div>
+			<div class="content" id="content">
+			</div>
+			<div class="footer" id="footer">
+			</div>
+		</div>
+		
+		<script src="js/jquery-2.2.0.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#header').load('templates/header.html');
+				$('#nav').load('templates/nav.html');
+				$('#content').load('pages/home.html');
+				$('#footer').load('templates/footer.html');
+			});
+		</script>
+	</body>
+</html>
+		

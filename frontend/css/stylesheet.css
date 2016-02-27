@@ -1,0 +1,63 @@
+body {
+	margin: 0px;
+}
+
+.wrapper {
+	width:1300px;
+	margin:0 auto;
+}
+
+.layer {
+
+
+}
+
+.header {
+	background-color:#ccc;
+	padding:10px;
+	overflow: hidden;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.logo {
+	float: left;
+}
+
+.title {
+	float: left;
+	margin-left: 15px;
+}
+
+.account-actions {
+	float:right;
+	margin-top:40px;
+	margin-right:25px;
+}
+
+.content {
+	background-color:#ccc;
+	padding:10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	overflow:auto;
+}
+
+.footer {
+	background-color:#ccc;
+	text-align:center;
+	padding:10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div.block {
+	float:left;
+}
+
+div.block.font-right {
+	text-align:right;
+}
