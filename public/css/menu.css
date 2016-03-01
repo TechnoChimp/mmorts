@@ -83,10 +83,10 @@ form#loginform p {
 }
 #menu li .drop {
 	padding-right:21px;
-	background:url("../images/drop.png") no-repeat right 8px;
+	background:url("../img/drop.png") no-repeat right 8px;
 }
 #menu li:hover .drop {
-	background:url("../images/drop.png") no-repeat right 7px;
+	background:url("../img/drop.png") no-repeat right 7px;
 }
 
 .dropdown_1column, 
