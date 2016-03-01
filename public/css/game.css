@@ -1,9 +1,17 @@
+/*
+ *  Game Window
+ */
+
 div#game {
 	position:relative;
 	width:1280px;
 	height:720px;
 	background:#000;
 }
+
+/*
+ *  Game UI
+ */
 
 div#character {
 	display:inline-block;
@@ -45,6 +53,10 @@ div#charsheet {
 	background:#aaa;
 }
 
+/*
+ *  Game Stage
+ */
+
 div#stage {
 	position:absolute;
 	top:0;
@@ -55,41 +67,70 @@ div#stage {
 	background:#000;
 }
 
-.city{
+/*
+ *  Action Window
+ */
+
+div.actionWindow {
+	border:solid 1px;
 	position:relative;
-	top:-360px;
-	left:-80px;
-	transform:rotateX(60deg) rotateZ(45deg);
-	border-spacing:0px;
-}
-
-.city tr {
-	width:0px;
-	height:0px;
-}
-
-.city td {
-	width:0px;
-	height:0px;
-	padding:0px;
-}
-
-.tile {
-	transform:rotateX(0deg);
-	width:90px;
-	height:90px;
-}
-
-.tile>div {
-	transform:rotateZ(-45deg) rotateY(-60deg);
-	width:256px;
-	height:256px;
+	visibility:hidden;
+	display:inline-block;
 	
 }
 
-div.tilexx{background:url('../img/iso.png') -768px -0px;background-size:1000%;position:relative;top:-128px;left:-128px;}
-div.tile00{background:url('../img/iso2.png') -0px -0px;background-size:500%;position:relative;top:-58px;left:-58px;}
-div.tile01{background:url('../img/iso2.png') -256px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
-div.tile02{background:url('../img/iso2.png') -512px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
-div.tile03{background:url('../img/iso2.png') -768px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
-div.tile04{background:url('../img/iso2.png') -1024px -0px;background-size:1000%;position:relative;top:-64px;left:-64px;}
+.smallAction {max-width:250px;}
+.mediumAction {max-width:500px;}
+.largeAction {max-width:750px;}
+
+div.actionWindow div.actionTitle {
+	position:absolute;
+	height:25px;
+	width:200px;
+	border:1px solid;
+	border-radius:25px;
+	z-index:1;
+	background:gray;
+}
+
+div.actionWindow div.actionTitle  h3 {
+	margin:0px;
+	text-align:center;
+}
+
+div.actionWindow div.actionData {
+	padding:10px;
+
+	display:inline-block;
+	border:solid 1px;
+	background:lightgray;
+
+}
+
+/*
+ * City Map
+ */
+
+div.city {
+	visibility:hidden;
+	position:absolute;
+	display:inline-block;
+}
+
+div.city table.cityMap {
+	border-collapse:collapse;
+	background-color:green;
+}
+
+div.tile {
+	height:128px;
+	width:128px;
+	border:solid 1px;
+	padding:0px;
+}
+
+.capitol {
+	background-image:url('../img/buildings.png');
+	background-position:-292px -185px;
+	background-size:430px 430px;
+}

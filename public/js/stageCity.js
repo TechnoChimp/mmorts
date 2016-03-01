@@ -1,29 +1,34 @@
 function stageCity() {
+	
 	//Set the stage
 	$('#stage').empty();
 	$('#stage').append('<table class="city"><tbody></tbody></table>');
 	
 	//Map specs
-	var mapHeight = 16;
-	var mapWidth = 16;
+	var mapRow = 6;
+	var mapCol = 10;
 	
 	//Draw the map
 	var tileX = 0;
 	var tileY = 0;
 	
-	while (tileX < mapWidth) {
+	while (tileX < mapRow) {
 		var currentRow = "row-"+tileX;
 		
 		$('.city tbody').append('<tr class="'+currentRow+'">');
 		
-		while (tileY < mapHeight) {
+		while (tileY < mapCol) {
 			var currentCol = "col-"+tileY;
-			$('.'+currentRow).append('<td class="'+currentCol+'"><div class="tile"><div class="tilexx"></div></div></td>');
+			$('.'+currentRow).append('<td class="'+currentCol+'"><div class="tile"></div></td>');
 			tileY++;
 		}
 		tileY=0;
 		tileX++;
 	}
 	
-	$('.row-5 .col-5').replaceWith('<td class="col-5"><div class="tile"><div class="tile00"></div></div></td>')
+	$('.row-3 .col-3').replaceWith('<td class="col-5"><div class="tile capitol"></div></td>');
+	
+	//Show the map
+	$('.city').css({"visibility":"visible"});
+	
 }
