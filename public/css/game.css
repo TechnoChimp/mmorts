@@ -7,6 +7,7 @@ div#game {
 	width:1280px;
 	height:720px;
 	background:#000;
+	overflow:hidden;
 }
 
 /*
@@ -65,18 +66,24 @@ div#stage {
 	width:1280px;
 	height:720px;
 	background:#000;
+	visibility:hidden;
 }
 
 /*
  *  Action Window
  */
 
+div#action {
+	position:relative;
+	margin-top:-306px;
+}
+
 div.actionWindow {
 	border:solid 1px;
-	position:relative;
+	position:absolute;
 	visibility:hidden;
 	display:inline-block;
-	
+	width:750px; /* Action Window width to be as large as the largest action size. */
 }
 
 .smallAction {max-width:250px;}
@@ -98,9 +105,22 @@ div.actionWindow div.actionTitle  h3 {
 	text-align:center;
 }
 
+div.actionWindow div.actionClose {
+	position:absolute;
+	height:25px;
+	width:25px;
+	border:solid 1px;
+	border-radius:100%;
+	font-size:18pt;
+	font-weight:bold;
+	line-height:26px;
+	text-indent:4px;
+	z-index:1;
+}
+
 div.actionWindow div.actionData {
 	padding:10px;
-
+	position:absolute;
 	display:inline-block;
 	border:solid 1px;
 	background:lightgray;

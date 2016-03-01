@@ -15,11 +15,16 @@
 			</div>
 		</div>
 	</div>
+	
 	<div id="stage">
 		<p style="color:white;">Test</p>
 	</div>
+	<div id="action">
+		
+	</div>
 </div>
 
+<script src='js/newActionWindow.js'></script>
 <script src='js/stageCity.js'></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -59,7 +64,7 @@
 		stageCity();
 		$('.capitol').click(function (e) {
 			console.log('Capitol building clicked.');
-			
+			newActionWindow();
 		});
 		
 		
