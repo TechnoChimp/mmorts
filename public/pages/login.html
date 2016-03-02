@@ -1,0 +1,56 @@
+<form id="loginForm" action=# autocomplete="off">
+	<p class="col_2">
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" />
+	</p>
+	<p class="col_2">
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" />
+	</p>
+	<a class="col_1 navlink" pageId="forgot" href="#">Forgot Password?</a>
+	<p class="col_1">
+		<input type="submit" id="login" value="Login" />
+	</p>
+</form>
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+		$('#login').click(function(e) {
+			//Disable posting form data to webpage
+			e.preventDefault();
+
+			//Gather form data and format it into JSON
+			var formdata = $('#loginForm').serializeArray();
+
+			var jsondata = {};
+			
+			jQuery.each(formdata, function() {
+				jsondata[this.name] = this.value || '';
+			});
+			
+			jsondata = JSON.stringify(jsondata);
+
+			$.ajax({
+				url: "../app/api/login",
+				type: "POST",
+				data: jsondata,
+				success: function(resultdata)
+				{
+					$('#content').load('pages/home.html');
+					
+					//Replace Login button with Logout button
+					console.log(resultdata);
+					
+				},
+				error: function(resultdata)
+				{
+					console.log(resultdata);
+				}
+			});
+		});
+		
+	});
+	
+</script>

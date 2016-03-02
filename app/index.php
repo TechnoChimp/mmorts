@@ -6,6 +6,7 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Db\Adapter\Pdo\Mysql as PdoMysql;
 use Phalcon\Http\Response;
 use Phalcon\Mvc\Application;
+use Phalcon\Session\Adapter\Files as Session;
 
 //Use Loader() to autoload our model
 $loader = new Loader();
@@ -37,6 +38,7 @@ $app = new Micro($di);
 
 //Retrieves character stats
 $app->get('/api/character', function() use ($app) {
+		
 	$phql = "SELECT * FROM character";
 	$character = $app->modelsManager->executeQuery($phql)->getFirst();
 
@@ -64,11 +66,11 @@ $app->post('/api/register', function() use ($app) {
 
 	$register = $app->request->getJsonRawBody();
 	
-	$phql = "INSERT INTO users (username, password, email) VALUES (:username:, :password:, :email:)";
+	$phql = "INSERT INTO users (username, password, email, active) VALUES (:username:, :password:, :email:, '1')";
 	
 	$status = $app->modelsManager->executeQuery($phql, array (
 		'username'	=> $register->username,
-		'password'	=> $register->password,
+		'password'	=> sha1($register->password),
 		'email'		=> $register->email,
 	));
 	
@@ -110,6 +112,55 @@ $app->post('/api/register', function() use ($app) {
 	
 	return $response;
 });
+
+//Process user login information
+$app->post('/api/login', function() use ($app) {
+		
+	$login = $app->request->getJsonRawBody();
+	
+	$user = Users::findFirst(array(
+                "(username = :username:) AND password = :password: AND active = '1'",
+                'bind' => array('username' => $login->username, 'password' => sha1($login->password))
+            ));
+	
+	//Create a response
+	$response = new Response();
+	
+	if ($user != false) {
+		
+		//Start the user session
+		$di = new FactoryDefault();
+		$di->setShared('session',function() {
+			$session = new Session();
+			$session->start();
+			$this->session->set("auth", TRUE);
+			$this->session->set("username", $login->username);
+			return $session;
+		});
+		
+		//Change the HTTP status and send response
+		$response->setStatusCode(201, "Success");
+		$response->setJsonContent(
+			array(
+				'status'	=> 'OK',
+				'data'		=> $login,
+			)
+		);
+	} else {
+		//Change the HTTP status and send response
+		$response->setStatusCode(409, "Error");
+		$response->setJsonContent(
+			array(
+				'status'	=> 'ERROR',
+				'data'		=> $login,
+			)
+		);
+	}
+	
+	return $response;
+	
+});
+
 
 //Default 404 page
 $app->notFound(function () use ($app) {
