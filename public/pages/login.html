@@ -21,27 +21,34 @@
 			//Disable posting form data to webpage
 			e.preventDefault();
 
-			//Gather form data and format it into JSON
-			var formdata = $('#loginForm').serializeArray();
-
-			var jsondata = {};
+			//Gather form data and format it into basic auth
+			var formData = $('#loginForm').serializeArray();
+			var basicAuth = btoa(formData[0].value+':'+formData[1].value);
 			
-			jQuery.each(formdata, function() {
-				jsondata[this.name] = this.value || '';
-			});
 			
-			jsondata = JSON.stringify(jsondata);
+			//var jsondata = {};
+			
+			//jQuery.each(formdata, function() {
+			//	jsondata[this.name] = this.value || '';
+			//});
+			
+			//jsondata = JSON.stringify(jsondata);
 
 			$.ajax({
-				url: "../app/api/login",
+				url: "../api/game/login",
 				type: "POST",
-				data: jsondata,
+				headers: {'Authorization': 'Basic '+basicAuth},
 				success: function(resultdata)
 				{
-					$('#content').load('pages/home.html');
+					// Set the global userAuth variable
+					userAuth = basicAuth;
 					
-					//Replace Login button with Logout button
-					console.log(resultdata);
+					// Replace Login button with Logout button
+					$('#auth').empty();
+					$('#auth').html('<a href="#">Logout</a>');
+					
+					// Redirect user to home page
+					$('#content').load('pages/home.html');
 					
 				},
 				error: function(resultdata)

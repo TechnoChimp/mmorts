@@ -24,10 +24,13 @@
 	</div>
 </div>
 
-<script src='js/newActionWindow.js'></script>
-<script src='js/stageCity.js'></script>
+<script src='js/uiFunctions.js'></script>
+<script src='js/cityFunctions.js'></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		// Get user information
+		console.log(getUserInfo());
 		
 		$('#charimage').click(function() {
 			$('#chartab').toggle();
@@ -35,7 +38,7 @@
 			
 			//Move me inside a stat tab.
 			jQuery.ajax({
-				url: "../app/api/character",
+				url: "../api/game/character",
 				type: "GET",
 				
 				contentType: 'application/json; charset=utf-8',
@@ -43,12 +46,6 @@
 					
 					var output="<ul>";
 					output+="<li>Name: " + resultData.name + "</li>";
-					output+="<li>Stat1: " + resultData.stat1 + "</li>";
-					output+="<li>Stat2: " + resultData.stat2 + "</li>";
-					output+="<li>Stat3: " + resultData.stat3 + "</li>";
-					output+="<li>Stat4: " + resultData.stat4 + "</li>";
-					output+="<li>Stat5: " + resultData.stat5 + "</li>";
-					output+="<li>Stat6: " + resultData.stat6 + "</li>";
 					output+="</ul>";
 					
 					$('#charsheet').html(output);

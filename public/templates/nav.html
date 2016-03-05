@@ -1,3 +1,8 @@
+<!--GLOBAL VARIABLES-->
+<script>
+	var userAuth = '';
+</script>
+
 <link href="css/menu.css" rel="stylesheet" type="text/css" media="screen" />
 
 <ul id="menu">
@@ -13,11 +18,11 @@
 		</div>
 	
 	</li>
-	<li><a href="#" class="drop">Testing</a>
+	<li><a href="#" class="drop" id="test">Testing</a>
 		
 
 	</li>
-	<li class="menu_right"><a href="#" class="drop">Login/Register</a>
+	<li id="auth" class="menu_right"><a href="#" class="drop">Login/Register</a>
 		<div class="dropdown_2columns align_right">
 			
 			<div class="col_2">
@@ -46,13 +51,18 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		//Load login form
+		// Load login form
 		$('.loginBody').load('pages/login.html');
 		
-		//Call page when link clicked
+		// Call page when link clicked
 		$('.navlink').click(function() {
 			var pageId = $(this).attr('pageId');
 			$('#content').load('pages/'+pageId+'.html');
+		});
+		
+		// Test button
+		$('#test').click(function() {
+			console.log(userAuth);
 		});
 	});
 </script>

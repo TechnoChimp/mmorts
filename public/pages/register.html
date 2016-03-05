@@ -31,26 +31,22 @@
 			e.preventDefault();
 			
 			//Gather form data and format it into JSON
-			var formdata = $('#registerform').serializeArray();
-			var jsondata = {};
-			
-			jQuery.each(formdata, function() {
-				jsondata[this.name] = this.value || '';
+			var formData = $('#registerform').serializeArray();
+			var jsonData = {};
+			jQuery.each(formData, function() {
+				jsonData[this.name] = this.value || '';
 			});
 			
-			jsondata = JSON.stringify(jsondata);
-			
+			// POST the request to the register API
 			$.ajax({
-				url: "../app/api/register",
+				url: "../api/register",
 				type: "POST",
-				data: jsondata,
-				success: function(resultdata)
-				{
-					$('#content').load('pages/registersuccess.html');
-				},
-				error: function(resultdata)
-				{
-					console.log(resultdata);
+				data: jsonData,
+				dataType: "application/json",
+				statusCode: {
+					201: function() {
+						$('#content').load('pages/registersuccess.html');
+					}
 				}
 			});
 			
