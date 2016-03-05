@@ -22,8 +22,6 @@
 </ul>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		
 		// Load login form
 		$('#auth').load('pages/login.html');
 		
@@ -35,9 +33,7 @@
 		
 		// Test button
 		$('#test').click(function() {
-			console.log(userAuth);
+			console.log(localStorage.getItem("userAuth"));
 		});
-		
-		
-	});
+
 </script>

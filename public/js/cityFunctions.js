@@ -4,6 +4,7 @@ function getUserInfo() {
 				url: "../api/game/user",
 				type: "GET",
 				contentType: 'application/json; charset=utf-8',
+				headers: {'Authorization': 'Basic '+basicAuth},
 				success: function(resultData) {
 					console.log(resultData);
 				},
