@@ -1,17 +1,43 @@
-<form id="loginForm" action=# autocomplete="off">
-	<p class="col_2">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" />
-	</p>
-	<p class="col_2">
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" />
-	</p>
-	<a class="col_1 navlink" pageId="forgot" href="#">Forgot Password?</a>
-	<p class="col_1">
-		<input type="submit" id="login" value="Login" />
-	</p>
-</form>
+<a href="#" class="drop">Login/Register</a>
+<div class="dropdown_2columns align_right">
+	
+	<div class="col_2">
+		<h3>Login</h3>				
+	</div>
+	
+	<div class="col_2 loginBody">
+		<form id="loginForm" action=# autocomplete="off">
+		<p class="col_2">
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" />
+		</p>
+		<p class="col_2">
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" />
+		</p>
+		<a class="col_1 navlink" pageId="forgot" href="#">Forgot Password?</a>
+		<p class="col_1">
+			<input type="submit" id="login" value="Login" />
+		</p>
+	</form>
+		
+	</div>
+		
+	<div class="col_2">
+		<h3>Register</h3>
+	</div>
+	
+	<div class="col_1">
+		<p class="col_1">
+			<a class="col_1 navlink" pageId="register" href="#">Register</a>
+		</p>
+	</div>
+
+
+</div>
+
+
+
 
 <script type="text/javascript">
 	
@@ -45,10 +71,18 @@
 					
 					// Replace Login button with Logout button
 					$('#auth').empty();
-					$('#auth').html('<a href="#">Logout</a>');
+					$('#auth').html('<a id="logout" href="#">Logout</a>');
 					
 					// Redirect user to home page
 					$('#content').load('pages/home.html');
+					
+					// Logout button action
+					$('#logout').click(function() {
+						// Empty userAuth variable
+						userAuth = '';
+						$('#auth').empty();
+						$('#auth').load('pages/login.html');
+					});
 					
 				},
 				error: function(resultdata)
