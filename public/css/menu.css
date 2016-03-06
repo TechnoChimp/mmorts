@@ -1,4 +1,4 @@
-body, ul, li {
+#menu ul, #menu li {
 	font-size:14px; 
 	font-family:Arial, Helvetica, sans-serif;
 	line-height:21px;

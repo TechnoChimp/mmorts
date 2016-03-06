@@ -34,29 +34,46 @@
 		////
 		// Initialization
 		
-		// Write stage title if it already exists in localStorage (move this to a character select function later so it will always be available here)
-		if (localStorage.getItem("city_name")) {
-			$('#stageTitle').append(localStorage.getItem("city_name"));
+		// Only load game content if user is authenticated
+		if (!localStorage.getItem("userAuth")) {
+			$('#content').empty();
+			$('#content').html('<p>You must login to launch the game.</p>');
+		} else {
+		
+			// Get user's character list, prompt to choose character
+			stageCharacterSelect();
+			
+			// Get character information
+			
+			// Load character information from backend
+			
+			// Load character onto screen
+			$(document).on("click", ".character", function() {
+			
+				// Write stage title if it already exists in localStorage (move this to a character select function later so it will always be available here)
+				if (localStorage.getItem("city_name")) {
+					$('#stageTitle').append(localStorage.getItem("city_name"));
+				}
+				// Get user information
+				getUserInfo(function(result) {
+					result = JSON.parse(result);
+					localStorage.setItem("char_name",result.char_name);
+					localStorage.setItem("city_name",result.city_name);
+					// Set stage title
+					$('#stageTitle').empty();
+					$('#stageTitle').append(localStorage.getItem("city_name"));
+				});
+				
+				
+				
+		
+				stageCity();
+				$('#capitol').click(function (e) {
+					console.log('Capitol building clicked.');
+					newActionWindow();
+				});
+			});
 		}
-		// Get user information
-		getUserInfo(function(result) {
-			result = JSON.parse(result);
-			localStorage.setItem("char_name",result.char_name);
-			localStorage.setItem("city_name",result.city_name);
-			// Set stage title
-			$('#stageTitle').empty();
-			$('#stageTitle').append(localStorage.getItem("city_name"));
-		});
-		
-		
-		
-
-		stageCity();
-		$('#capitol').click(function (e) {
-			console.log('Capitol building clicked.');
-			newActionWindow();
-		});
-
 		
 	});
 </script>

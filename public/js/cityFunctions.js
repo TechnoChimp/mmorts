@@ -17,9 +17,18 @@ function getUserInfo(callback) {
 		});
 }
 
-// Draw city
+//////
+// stageCharacterSelect
+
+function stageCharacterSelect() {
+	$('#game').empty();
+	$('#game').load('pages/gamesheets/characterselect.html');
+}
+
+//////
+// stageCity
+
 function stageCity() {
-	
 	//Set the stage
 	$('#stage').empty();
 	$('#stage').append('<table class="city"><tbody></tbody></table>');
@@ -46,9 +55,12 @@ function stageCity() {
 		tileX++;
 	}
 	
+	// This is temporary to place an building - will be replaced with map data
 	$('.row-3 .col-3').replaceWith('<td class="col-3"><div class="tile" id="capitol"></div></td>');
 	
 	//Show the map
 	$('.city').css({"visibility":"visible"});
 	
 }
+
+

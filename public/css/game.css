@@ -87,6 +87,43 @@ div#stage {
 }
 
 /*
+ *  Character Select
+ */
+
+div.charSelect table {
+	position:absolute;
+	top:10px;
+	left:30px;
+	height:700px;
+	background:lightgray;
+	width:1200px;
+	text-align:center;
+}
+
+div.charSelect table th{
+	background:gray;
+	font-size:18pt;
+	font-weight:bold;
+}
+
+div.charSelect table td:hover {
+	background:gray;
+}
+
+div.charSelect table div.character ul.charSpec {
+	list-style:none;
+	font-size:16pt;
+	font-weight:bold;
+}
+
+img.charImage {
+	width:350px;
+	height:500px;
+	background:white;
+	border:solid 1px black;
+}
+
+/*
  *  Action Window
  */
 
