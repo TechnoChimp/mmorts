@@ -14,10 +14,12 @@
 	
 			</div>
 		</div>
+		<div id="stageTitle">
+			
+		</div>
 	</div>
 	
 	<div id="stage">
-		<p style="color:white;">Test</p>
 	</div>
 	<div id="action">
 		
@@ -29,41 +31,32 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		// Get user information
-		console.log(getUserInfo());
+		////
+		// Initialization
 		
-		$('#charimage').click(function() {
-			$('#chartab').toggle();
-			$('#charsheet').toggle();
-			
-			//Move me inside a stat tab.
-			jQuery.ajax({
-				url: "../api/game/character",
-				type: "GET",
-				
-				contentType: 'application/json; charset=utf-8',
-				success: function(resultData) {
-					
-					var output="<ul>";
-					output+="<li>Name: " + resultData.name + "</li>";
-					output+="</ul>";
-					
-					$('#charsheet').html(output);
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-				},
-				
-				timeout: 120000,
-			});
-			
+		// Write stage title if it already exists in localStorage (move this to a character select function later so it will always be available here)
+		if (localStorage.getItem("city_name")) {
+			$('#stageTitle').append(localStorage.getItem("city_name"));
+		}
+		// Get user information
+		getUserInfo(function(result) {
+			result = JSON.parse(result);
+			localStorage.setItem("char_name",result.char_name);
+			localStorage.setItem("city_name",result.city_name);
+			// Set stage title
+			$('#stageTitle').empty();
+			$('#stageTitle').append(localStorage.getItem("city_name"));
 		});
 		
+		
+		
+
 		stageCity();
-		$('.capitol').click(function (e) {
+		$('#capitol').click(function (e) {
 			console.log('Capitol building clicked.');
 			newActionWindow();
 		});
-		
+
 		
 	});
 </script>

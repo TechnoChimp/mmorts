@@ -1,19 +1,20 @@
 // 
-function getUserInfo() {
+function getUserInfo(callback) {
+	var result;
 	jQuery.ajax({
-				url: "../api/game/user",
-				type: "GET",
-				contentType: 'application/json; charset=utf-8',
-				headers: {'Authorization': 'Basic '+basicAuth},
-				success: function(resultData) {
-					console.log(resultData);
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-				},
-				
-				timeout: 120000,
-			});
+			url: "../api/game/user",
+			type: "GET",
+			contentType: 'application/json; charset=utf-8',
+			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
+			success: function(resultData) {
+				result = resultData;
+				callback(result);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+			},
 			
+			timeout: 120000,
+		});
 }
 
 // Draw city
@@ -45,7 +46,7 @@ function stageCity() {
 		tileX++;
 	}
 	
-	$('.row-3 .col-3').replaceWith('<td class="col-5"><div class="tile capitol"></div></td>');
+	$('.row-3 .col-3').replaceWith('<td class="col-3"><div class="tile" id="capitol"></div></td>');
 	
 	//Show the map
 	$('.city').css({"visibility":"visible"});

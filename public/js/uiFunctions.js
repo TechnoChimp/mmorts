@@ -47,3 +47,17 @@ function newActionWindow() {
 		$('#action').empty();
 	});
 }
+
+
+$('#charimage').click(function() {
+	$('#chartab').toggle();
+	$('#charsheet').toggle();
+	
+	var charData="<ul>";
+	charData+="<li>Name: " + localStorage.getItem("char_name") + "</li>";
+	charData+="</ul>";
+	
+	$('#charsheet').html(charData);
+		
+	
+});

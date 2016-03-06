@@ -1,47 +1,20 @@
-<a href="#" class="drop">Login/Register</a>
-<div class="dropdown_2columns align_right">
-	
-	<div class="col_2">
-		<h3>Login</h3>				
-	</div>
-	
-	<div class="col_2 loginBody">
-		<form id="loginForm" action=# autocomplete="off">
-		<p class="col_2">
-			<label for="username">Username:</label>
-			<input type="text" id="username" name="username" />
-		</p>
-		<p class="col_2">
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" />
-		</p>
-		<a class="col_1 navlink" pageId="forgot" href="#">Forgot Password?</a>
-		<p class="col_1">
-			<input type="submit" id="login" value="Login" />
-		</p>
-	</form>
-		
-	</div>
-		
-	<div class="col_2">
-		<h3>Register</h3>
-	</div>
-	
-	<div class="col_1">
-		<p class="col_1">
-			<a class="col_1 navlink" pageId="register" href="#">Register</a>
-		</p>
-	</div>
 
-
-</div>
-
-
-
-
-<script type="text/javascript">
-
-		$('#login').click(function(e) {
+<form id="loginForm" action=# autocomplete="off">
+	<p class="col_2">
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" />
+	</p>
+	<p class="col_2">
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" />
+	</p>
+	<a class="col_1 navlink" pageId="forgot" href="#">Forgot Password?</a>
+	<p class="col_1">
+		<input type="submit" id="login" value="Login" />
+	</p>
+</form>
+<script>
+$('#login').click(function(e) {
 			//Disable posting form data to webpage
 			e.preventDefault();
 
@@ -49,15 +22,6 @@
 			var formData = $('#loginForm').serializeArray();
 			var basicAuth = btoa(formData[0].value+':'+formData[1].value);
 			
-			
-			//var jsondata = {};
-			
-			//jQuery.each(formdata, function() {
-			//	jsondata[this.name] = this.value || '';
-			//});
-			
-			//jsondata = JSON.stringify(jsondata);
-
 			$.ajax({
 				url: "../api/game/login",
 				type: "POST",
@@ -76,10 +40,10 @@
 					
 					// Logout button action
 					$('#logout').click(function() {
-						// Empty userAuth variable
+						// Empty userAuth variable (redo this so the login section can be reloaded)
 						localStorage.setItem("userAuth", "");
-						$('#auth').empty();
-						$('#auth').load('pages/login.html');
+						//$('#auth').empty();
+						//$('#auth').load('pages/login.html');
 					});
 					
 				},
@@ -89,5 +53,4 @@
 				}
 			});
 		});
-
 </script>

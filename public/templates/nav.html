@@ -18,12 +18,39 @@
 
 	</li>
 	<li id="auth" class="menu_right">
+		<a href="#" class="drop">Login/Register</a>
+
+		<div class="dropdown_2columns align_right">
+			
+			<div class="col_2">
+				<h3>Login</h3>				
+			</div>
+			
+			<div class="col_2 loginBody">
+			
+			</div>
+		
+			<div class="col_2">
+				<h3>Register</h3>
+			</div>
+			
+			<div class="col_1">
+				<p class="col_1">
+					<a class="col_1 navlink" pageId="register" href="#">Register</a>
+				</p>
+			</div>
+		
+		
+		</div>
+
 	</li>
 </ul>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+			
 		// Load login form
-		$('#auth').load('pages/login.html');
+		$('.loginBody').load('pages/login.html');
 		
 		// Call page when link clicked
 		$('.navlink').click(function() {
@@ -35,5 +62,7 @@
 		$('#test').click(function() {
 			console.log(localStorage.getItem("userAuth"));
 		});
-
+		
+		
+	});
 </script>

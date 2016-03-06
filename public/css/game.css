@@ -54,6 +54,23 @@ div#charsheet {
 	background:#aaa;
 }
 
+div#stageTitle {
+	width:500px;
+	height:50px;
+	border:solid 1px white;
+	position:absolute;
+	top:4px;
+	left:390px;
+	border-radius:25px;
+	background-color:gray;
+	text-align:center;
+	font-weight:bold;
+	font-size:18pt;
+	line-height:50px;
+	z-index:9;
+	cursor:default;
+}
+
 /*
  *  Game Stage
  */
@@ -98,6 +115,7 @@ div.actionWindow div.actionTitle {
 	border-radius:25px;
 	z-index:1;
 	background:gray;
+	cursor:default;
 }
 
 div.actionWindow div.actionTitle  h3 {
@@ -116,6 +134,7 @@ div.actionWindow div.actionClose {
 	line-height:26px;
 	text-indent:4px;
 	z-index:1;
+	cursor:default;
 }
 
 div.actionWindow div.actionData {
@@ -149,7 +168,7 @@ div.tile {
 	padding:0px;
 }
 
-.capitol {
+#capitol {
 	background-image:url('../img/buildings.png');
 	background-position:-292px -185px;
 	background-size:430px 430px;

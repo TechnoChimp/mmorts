@@ -21,6 +21,5 @@ $app->get('/game/user', function(RequestInterface $request, ResponseInterface $r
 	
 	$statement = $pdo->query($query);
 	$result = $statement->fetch(PDO::FETCH_ASSOC);
-	print_r ($result);
-	//print_r (json_encode($result[0]));
+	return json_encode($result);
 });
