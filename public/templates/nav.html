@@ -2,72 +2,30 @@
 
 <ul id="menu">
 	<li><a class="navlink" pageId="home" href="#">Home</a></li>
-    <li><a href="#" class="drop">Game</a>
-		
+    <li>
+    	<a href="#" class="drop">Game</a>
 		<div class="dropdown_1column">
-			
 			<div class="col_1">
 				<a class="navlink" pageId="game" href=#><h2>Launch Game</h2></a>
 			</div>
-			
 		</div>
-	
 	</li>
-	<li><a href="#" class="drop" id="test">Testing</a>
-		
-
+	<li>
+	</li>
+	<li>
+		<a href="#" class="drop" id="test">Testing</a>
 	</li>
 	<li id="auth" class="menu_right">
-		<a href="#" class="drop">Login/Register</a>
-
-		<div class="dropdown_2columns align_right">
-			
-			<div class="col_2">
-				<h3>Login</h3>				
-			</div>
-			
-			<div class="col_2 loginBody">
-				<form id="loginForm" action=# autocomplete="off">
-					<p class="col_2">
-						<label for="username">Username:</label>
-						<input type="text" id="username" name="username" />
-					</p>
-					<p class="col_2">
-						<label for="password">Password:</label>
-						<input type="password" id="password" name="password" />
-					</p>
-					<a class="col_1 navlink" pageId="forgot" href="#">Forgot Password?</a>
-					<p class="col_1">
-						<input type="submit" id="login" value="Login" />
-					</p>
-				</form>
-			</div>
-		
-			<div class="col_2">
-				<h3>Register</h3>
-			</div>
-			
-			<div class="col_1">
-				<p class="col_1">
-					<a class="col_1 navlink" pageId="register" href="#">Register</a>
-				</p>
-			</div>
-		
-		
-		</div>
-
 	</li>
 </ul>
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		// Load login form (should be empty, but just in case)
+		$('#auth').empty();
+		$('#auth').load('templates/login.html');
 
 		// Call page when link clicked
-		//$('.navlink').click(function() {
-		//	var pageId = $(this).attr('pageId');
-		//	$('#content').load('pages/'+pageId+'.html');
-		//});
-		
 		$(document).on("click", ".navlink", function() {
 			var pageId = $(this).attr('pageId');
 			$('#content').load('pages/'+pageId+'.html');
@@ -80,12 +38,17 @@
 		
 //		$('#login').click(function(e) {
 		$(document).on("click", "#login", function(e) {
-			//Disable posting form data to webpage
+			// Disable posting form data to webpage
 			e.preventDefault();
 
-			//Gather form data and format it into basic auth
+			// Gather form data and format it into basic auth
 			var formData = $('#loginForm').serializeArray();
-			var basicAuth = btoa(formData[0].value+':'+formData[1].value);
+			var username = formData[0].value;
+			var password = formData[1].value;
+			var basicAuth = btoa(username+':'+password);
+			
+			// Store username into localStorage
+			localStorage.setItem("username", username);
 			
 			$.ajax({
 				url: "../api/game/login",
@@ -98,7 +61,7 @@
 					
 					// Replace Login button with Logout button
 					$('#auth').empty();
-					$('#auth').html('<a id="logout" href="#">Logout</a>');
+					$('#auth').html('<a id="logout" href="#">'+username+' (Logout)</a>');
 					
 					// Redirect user to home page
 					$('#content').load('pages/home.html');
@@ -106,7 +69,7 @@
 					// Logout button action
 					$('#logout').click(function() {
 						// Empty userAuth variable (redo this so the login section can be reloaded)
-						localStorage.setItem("userAuth", "");
+						localStorage.clear();
 						$('#auth').empty();
 						$('#auth').load('templates/login.html');
 					});
