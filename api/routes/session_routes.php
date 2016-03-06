@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 $app->add(new \Slim\Middleware\HttpBasicAuthentication(array(
     "path" => "/game",
     "realm" => "Protected",
+    "relaxed" => array("localhost", "192.168.0.24"),
     "environment" => "REDIRECT_HTTP_AUTHORIZATION",
     "authenticator" => new PdoAuthenticator(array(
         "pdo" => $pdo,
