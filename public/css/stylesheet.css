@@ -58,6 +58,6 @@ div.block {
 	float:left;
 }
 
-div.block.font-right {
+#registerform .right-align {
 	text-align:right;
 }

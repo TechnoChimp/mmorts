@@ -121,8 +121,8 @@ class HttpBasicAuthentication
             return $this->error($request, $response, [
                 "message" => "Authentication failed"
             ])
-            ->withStatus(401)
-            ->withHeader("WWW-Authenticate", sprintf('Basic realm="%s"', $this->options["realm"]));
+            ->withStatus(401);
+//            ->withHeader("WWW-Authenticate", sprintf('Basic realm="%s"', $this->options["realm"]));
         }
 
         /* If callback returns false return with 401 Unauthorized. */
@@ -131,8 +131,8 @@ class HttpBasicAuthentication
                 return $this->error($request, $response, [
                     "message" => "Callback returned false"
                 ])
-                ->withStatus(401)
-                ->withHeader("WWW-Authenticate", sprintf('Basic realm="%s"', $this->options["realm"]));
+                ->withStatus(401);
+//                ->withHeader("WWW-Authenticate", sprintf('Basic realm="%s"', $this->options["realm"]));
             }
         }
 

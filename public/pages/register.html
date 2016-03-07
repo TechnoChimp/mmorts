@@ -1,42 +1,86 @@
 <h2>Register</h2>
-<div class="block font-right">
+<div class="block">
 	<form id="registerform" autocomplete="off" onsubmit="">
-		<p>
-			<label for="username">Username:</label>
-			<input type="text" id="username" name="username" />
-		</p>
-		<p>
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" />
-		</p>
-		<p>
-			<label for="confirm">Confirm Password:</label>
-			<input type="password" id="confirm" name="confirmpassword" />
-		</p>
-		<p>
-			<label for="password">Email Address:</label>
-			<input type="email" id="email" name="email" />
-		</p>
-			<button id="register">Register</button>
-
+		<table>
+			<tr>
+				<td class="right-align">
+					<label for="username">Username:</label>
+				</td>
+				<td>
+					<input type="text" id="username" name="username"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="right-align">
+					<label for="reg_pass">Password:</label>
+				</td>
+				<td>
+					<input type="password" id="reg_pass" name="reg_pass" />
+				</td>
+			</tr>
+			<tr>
+				<td class="right-align">
+					<label for="confirm">Confirm Password:</label>
+				</td>
+				<td>
+					<input type="password" id="confirm" name="confirmpassword" />
+				</td>
+			</tr>
+			<tr>
+				<td class="right-align">
+					<label for="email">Email Address:</label>
+				</td>
+				<td>
+					<input type="email" id="email" name="email" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="register">Register</button>
+				</td>
+			</tr>
+		</table>
 	</form>
 </div>
 
+<script src='http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.js'></script>
+<script src='js/jquery.validate.js'></script>
 <script type="text/javascript">
-	
-	$(document).ready(function() {
+	$('#content').on('click', '#register', function(e) {
+		//Disable posting form data to webpage
+		e.preventDefault();
 		
-		$('#register').click(function(e) {
-			//Disable posting form data to webpage
-			e.preventDefault();
-			
+		// Validate form data
+		var validInput = $('#registerform').validate({
+			rules: {
+				username: {
+					required: true,
+					minlength: 6,
+					maxlength: 16
+				},
+				reg_pass: {
+					required: true,
+					minlength: 6
+				},
+				confirmpassword: {
+					required: true,
+					minlength: 6,
+					equalTo: "#reg_pass"
+				},
+				email: {
+					required: true,
+					email: true
+				}
+			}
+		}).form();
+		
+		if (validInput) {
 			//Gather form data and format it into JSON
 			var formData = $('#registerform').serializeArray();
 			var jsonData = {};
 			jQuery.each(formData, function() {
 				jsonData[this.name] = this.value || '';
 			});
-			
 			// POST the request to the register API
 			$.ajax({
 				url: "../api/register",
@@ -49,8 +93,6 @@
 					}
 				}
 			});
-			
-		});
+		}
 	});
-	
 </script>

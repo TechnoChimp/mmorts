@@ -30,7 +30,7 @@ $app->post("/register", function(RequestInterface $request, ResponseInterface $r
 	$username = $body['username'];
 	$email = $body['username'];
 	// Hash the password
-	$password = password_hash($body['password'], PASSWORD_DEFAULT);
+	$password = password_hash($body['reg_pass'], PASSWORD_DEFAULT);
 	
 	$status = $pdo->exec(
 		"INSERT INTO users (username, password, email, active) VALUES ('{$username}', '{$password}', '{$email}', '1')" 
