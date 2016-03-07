@@ -17,11 +17,22 @@
 		</div>
 		
 		<script src="js/jquery-2.2.0.js"></script>
-		<script src="js/config.js"></script>
+		<script src="js/mainFunctions.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				// Load content into main sections
 				$('#header').load('templates/header.html');
-				$('#nav').load('templates/nav.html');
+				$('#nav').load('templates/nav.html', function() {
+					// Check to see if user already has cached credentials
+					if (localStorage.getItem('userAuth') && localStorage.getItem('username')) {
+						// Run loginAction() function
+						loginAction();
+					} else {
+						// Load login form (should be empty, but just in case)
+						$('#auth').empty();
+						$('#auth').load('templates/login.html');
+					}
+				});
 				$('#content').load('pages/home.html');
 				$('#footer').load('templates/footer.html');
 			});
