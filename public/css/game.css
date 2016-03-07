@@ -96,7 +96,7 @@ div.charSelect table {
 	left:30px;
 	height:700px;
 	background:lightgray;
-	width:1200px;
+	max-width:1200px;
 	text-align:center;
 }
 

@@ -1,29 +1,6 @@
 <link href="css/game.css" rel="stylesheet" type="text/css">
-<script src="js/config.js"></script>
 <h2>Game</h2>
 <div id="game">
-	<div id="game_ui">
-		<div id="character">
-			<div id="charimage">
-				
-			</div>
-			<div id="chartab">
-				
-			</div>
-			<div id="charsheet">
-	
-			</div>
-		</div>
-		<div id="stageTitle">
-			
-		</div>
-	</div>
-	
-	<div id="stage">
-	</div>
-	<div id="action">
-		
-	</div>
 </div>
 
 <script src='js/uiFunctions.js'></script>
@@ -39,41 +16,41 @@
 			$('#content').empty();
 			$('#content').html('<p>You must login to launch the game.</p>');
 		} else {
-		
 			// Get user's character list, prompt to choose character
 			stageCharacterSelect();
+
 			
-			// Get character information
+
+			// Write character information into localStorage
 			
-			// Load character information from backend
-			
+
 			// Load character onto screen
-			$(document).on("click", ".character", function() {
-			
-				// Write stage title if it already exists in localStorage (move this to a character select function later so it will always be available here)
-				if (localStorage.getItem("city_name")) {
-					$('#stageTitle').append(localStorage.getItem("city_name"));
-				}
-				// Get user information
-				getUserInfo(function(result) {
-					result = JSON.parse(result);
-					localStorage.setItem("char_name",result.char_name);
-					localStorage.setItem("city_name",result.city_name);
-					// Set stage title
-					$('#stageTitle').empty();
-					$('#stageTitle').append(localStorage.getItem("city_name"));
-				});
+			$('#game').on('click', '.character', function() {
+				// Set the characterId and cityID into localStorage
+				localStorage.setItem('charId', $(this).attr('charId'));
+				localStorage.setItem('cityId', $(this).attr('cityId'));
+				var cityId = localStorage.getItem('city_id');
 				
+				// Clear the game board and setup the game
+				$('#game').empty();
+				$('#game').append('<div id="game_ui"></div>');
+				$('#game_ui').load('pages/gamesheets/ui.html');
+				$('#game').append('<div id="stage"></div><div id="action"></div>');
 				
+				// Set the city stage
+				stageCity(localStorage.getItem('cityId'));
 				
-		
-				stageCity();
-				$('#capitol').click(function (e) {
-					console.log('Capitol building clicked.');
-					newActionWindow();
-				});
 			});
 		}
+		
+		//////
+		// City Interaction
+		
+		// Click capitol building (will be expanded to consume the click of any building, using just the capitol for testing)
+		$('#game').on('click', '#capitol', function() {
+			console.log('Capitol building clicked.');
+			newActionWindow();
+		});
 		
 	});
 </script>
