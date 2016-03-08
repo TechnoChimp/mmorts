@@ -20,8 +20,10 @@ div#character {
 	z-index:10;
 	top:4px;
 	left:4px;
-	width:500px;
-	height:300px;
+	/*width:500px;
+	height:300px;*/
+	width:102px;
+	height:102px;
 }
 
 div#charimage {
@@ -34,10 +36,11 @@ div#charimage {
 }
 
 div#chartab {
-	display:none;
 	position:absolute;
-	width:100px;
-	height:198px;
+	/*width:100px;
+	height:198px;*/
+	width:0px;
+	height:0px;
 	left:0px;
 	bottom:0px;
 	border:solid 1px white;
@@ -45,10 +48,11 @@ div#chartab {
 }
 
 div#charsheet {
-	display:none;
 	position:absolute;
-	width:396px;
-	height:298px;
+	/*width:396px;
+	height:298px;*/
+	width:0px;
+	height:0px;
 	right:0px;
 	border:solid 1px white;
 	background:#aaa;
@@ -140,9 +144,9 @@ div.actionWindow {
 	width:750px; /* Action Window width to be as large as the largest action size. */
 }
 
-.smallAction {max-width:250px;}
-.mediumAction {max-width:500px;}
-.largeAction {max-width:750px;}
+.smallAction {width:250px;}
+.mediumAction {width:500px;}
+.largeAction {width:750px;}
 
 div.actionWindow div.actionTitle {
 	position:absolute;
@@ -180,7 +184,17 @@ div.actionWindow div.actionData {
 	display:inline-block;
 	border:solid 1px;
 	background:lightgray;
+}
 
+div.actionWindow div.actionData ul {
+	list-style-type:none;
+}
+
+.windowDataHalf {
+	width:50%;
+}
+.windowDataFull {
+	width:100%;
 }
 
 /*
