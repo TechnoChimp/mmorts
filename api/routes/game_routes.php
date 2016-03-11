@@ -1,13 +1,20 @@
 <?php
 
+//////
+//
+// SETUP
+//
+//////
+
 // Enable Slim's request and response interfaces
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-// Test Function
-$app->get('/game', function(RequestInterface $request, ResponseInterface $response) use($app) {
-    return 'Success!';
-});
+//////
+//
+// GET ROUTES
+//
+/////
 
 //////
 // GET /game/character
@@ -65,17 +72,36 @@ $app->get('/game/character/{id}', function(RequestInterface $request, ResponseIn
 //////
 // GET /game/city/{id}
 
-// Get current user's characters
+// Get city information by city ID
 $app->get('/game/city/{id}', function(RequestInterface $request, ResponseInterface $response) use($app) {
 	// Get city ID from request
 	$id = $request->getAttribute('id');
 
-	$query = "SELECT c.name as city_name FROM cities c WHERE c.id = '{$id}'";
+	$query = "SELECT c.id as city_id, c.name as city_name FROM cities c WHERE c.id = '{$id}'";
 	
 	// Acquire database connection and perform query
 	global $pdo;
 	$statement = $pdo->query($query);
 	$result = $statement->fetch(PDO::FETCH_ASSOC);
+	
+	// Return data in JSON format
+	return json_encode($result);
+});
+
+//////
+// GET /game/city/{id}/members
+
+// Get members of city with specified ID
+$app->get('/game/city/{id}/members', function(RequestInterface $request, ResponseInterface $response) use($app) {
+	// Get city ID from request
+	$id = $request->getAttribute('id');
+
+	$query = "SELECT a.name as char_name FROM characters a LEFT JOIN cities b ON a.city_id = b.id WHERE b.id = '{$id}'";
+	
+	// Acquire database connection and perform query
+	global $pdo;
+	$statement = $pdo->query($query);
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 	
 	// Return data in JSON format
 	return json_encode($result);

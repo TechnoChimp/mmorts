@@ -132,8 +132,10 @@ img.charImage {
  */
 
 div#action {
-	position:relative;
-	margin-top:-306px;
+	position:absolute;
+	width:1280px;
+	top:0px;
+	left:0px;
 }
 
 div.actionWindow {

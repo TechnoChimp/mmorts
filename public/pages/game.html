@@ -48,8 +48,7 @@
 		
 		// Click capitol building (will be expanded to consume the click of any building, using just the capitol for testing)
 		$('#game').on('click', '#capitol', function() {
-			console.log('Capitol building clicked.');
-			newActionWindow();
+			newActionWindow(localStorage.getItem('cityId'));
 		});
 		
 	});
