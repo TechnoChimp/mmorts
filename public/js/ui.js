@@ -22,7 +22,7 @@ actionWindow.prototype = {
 	constructor: actionWindow,
 	
 	// displayWindow method will display the window on screen
-	displayWindow: function() {
+	displayWindow: function(_callback) {
 		// Pass object variables to loca variables
 		var title = this.title;
 		var contentClass = this.size + 'Window'; // smallWindow, mediumWindow, largeWindow classes
@@ -49,6 +49,9 @@ actionWindow.prototype = {
 			$('#windowContent').css({"left":contentXCenter,"top":contentYCenter});
 			$('#windowClose').css({"right":closeXPosition,"top":closeYPosition});
 			$('#windowWrapper').css({"visibility":"visible"});
+			
+			// Run callback
+			_callback();
 		});
 	}
 };
@@ -65,8 +68,15 @@ $('#game').on('click', '#windowClose', function() {
 
 // Create new inventory action window
 $('#game').on('click', '#inventory', function() {
-	invWindow = new actionWindow('medium', 'Inventory', 'Nothing here yet boss.');
-	invWindow.displayWindow();
+	// Get the inventory structure from file
+	$.get('pages/gamesheets/inventory.html', function(invSheet) {
+		invWindow = new actionWindow('medium', 'Inventory', invSheet);
+		invWindow.displayWindow(function() {
+			for (var i = 0; i < 9; i++) {
+				inv[i].getSlot();
+			}
+		});
+	});
 });
 
 //////

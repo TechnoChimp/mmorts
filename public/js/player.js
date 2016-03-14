@@ -60,10 +60,10 @@ function invSlot(slot, qty, name, desc, img) {
 // Inherit the item prototype
 inheritPrototype(invSlot, item);
 
-// Add additional methods to invSlot
+////// Add additional methods to invSlot
 
 // getSlot will write the item information to the inventory slot(invTable) defined in slot
 invSlot.prototype.getSlot = function() {
-	console.log('getSlot method called.');
-	console.log('Name: ' + this.name + '\nImg: ' + this.img + '\nQuantity: ' + this.qty);
+	var slot = '#invSlot' + this.slot;
+	$(slot).addClass('item1 item1-0-0');
 };

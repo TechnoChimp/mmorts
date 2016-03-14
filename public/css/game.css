@@ -81,13 +81,27 @@ div#stageTitle {
 /* Inventory Sheet */
 
 div#inventory {
-	width:50px;
-	height:50px;
-	border:solid 1px white;
+	width:64px;
+	height:64px;
+	background:url("../img/inventory_icon.png");
 	position:absolute;
 	top:108px;
 	left:4px;
 	z-index:10;
+}
+
+table#invTable {
+	border-collapse:collapse;
+}
+
+table#invTable, table#invTable td {
+	border:1px solid black;
+}
+
+table#invTable td {
+	padding:0px;
+	width:60px;
+	height:60px;
 }
 
 /* Window */
