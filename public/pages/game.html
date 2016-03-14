@@ -3,7 +3,7 @@
 <div id="game">
 </div>
 
-<script src='js/uiFunctions.js'></script>
+<script src='js/ui.js'></script>
 <script src='js/cityFunctions.js'></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -35,7 +35,13 @@
 				$('#game').empty();
 				$('#game').append('<div id="game_ui"></div>');
 				$('#game_ui').load('pages/gamesheets/ui.html');
-				$('#game').append('<div id="stage"></div><div id="action"></div>');
+				$('#game').append('<div id="stage"></div><div id="window_layer"></div>');
+				
+				// Initialize player inventory
+				var inv = [];
+				for (var i = 0; i < 10; i++) {
+					inv[i] = new invSlot(i);
+				}
 				
 				// Set the city stage
 				stageCity(localStorage.getItem('cityId'));
@@ -50,6 +56,7 @@
 		$('#game').on('click', '#capitol', function() {
 			newActionWindow(localStorage.getItem('cityId'));
 		});
+		
 		
 	});
 </script>

@@ -14,6 +14,7 @@ div#game {
  *  Game UI
  */
 
+/* Character Sheet */
 div#character {
 	display:inline-block;
 	position:relative;
@@ -58,6 +59,8 @@ div#charsheet {
 	background:#aaa;
 }
 
+/* Stage Title */
+
 div#stageTitle {
 	width:500px;
 	height:50px;
@@ -75,8 +78,89 @@ div#stageTitle {
 	cursor:default;
 }
 
+/* Inventory Sheet */
+
+div#inventory {
+	width:50px;
+	height:50px;
+	border:solid 1px white;
+	position:absolute;
+	top:108px;
+	left:4px;
+	z-index:10;
+}
+
+/* Window */
+
+div#window_layer {
+	position:absolute;
+	width:1280px;
+	top:0px;
+	left:0px;
+}
+
+div#windowWrapper {
+	border:solid 1px;
+	position:absolute;
+	visibility:hidden;
+	display:inline-block;
+	width:750px; /* Action Window width to be as large as the largest action size. */
+}
+
+.smallWindow {width:250px; height:325px;}
+.mediumWindow {width:500px; height:500px;}
+.largeWindow {width:750px; height:500px;}
+
+div#windowTitle {
+	position:absolute;
+	height:25px;
+	width:200px;
+	border:1px solid;
+	border-radius:25px;
+	z-index:1;
+	background:gray;
+	cursor:default;
+	text-align:center;
+	font-size:18px;
+	font-weight:bold;
+	line-height:25px;
+}
+
+div#windowClose {
+	position:absolute;
+	height:25px;
+	width:25px;
+	border:solid 1px;
+	border-radius:100%;
+	font-size:18pt;
+	font-weight:bold;
+	line-height:26px;
+	text-indent:4px;
+	z-index:1;
+	cursor:default;
+}
+
+div#windowContent {
+	padding:35px;
+	position:absolute;
+	display:inline-block;
+	border:solid 1px;
+	background:lightgray;
+}
+
+div#windowContent ul {
+	list-style-type:none;
+}
+
+.windowContentHalf {
+	width:50%;
+}
+.windowContentFull {
+	width:100%;
+}
+
 /*
- *  Game Stage
+ *   Stage
  */
 
 div#stage {
@@ -86,7 +170,7 @@ div#stage {
 	overflow:hidden;
 	width:1280px;
 	height:720px;
-	background:#000;
+	background-image:#000;
 	visibility:hidden;
 }
 
@@ -125,78 +209,6 @@ img.charImage {
 	height:500px;
 	background:white;
 	border:solid 1px black;
-}
-
-/*
- *  Action Window
- */
-
-div#action {
-	position:absolute;
-	width:1280px;
-	top:0px;
-	left:0px;
-}
-
-div.actionWindow {
-	border:solid 1px;
-	position:absolute;
-	visibility:hidden;
-	display:inline-block;
-	width:750px; /* Action Window width to be as large as the largest action size. */
-}
-
-.smallAction {width:250px;}
-.mediumAction {width:500px;}
-.largeAction {width:750px;}
-
-div.actionWindow div.actionTitle {
-	position:absolute;
-	height:25px;
-	width:200px;
-	border:1px solid;
-	border-radius:25px;
-	z-index:1;
-	background:gray;
-	cursor:default;
-}
-
-div.actionWindow div.actionTitle  h3 {
-	margin:0px;
-	text-align:center;
-}
-
-div.actionWindow div.actionClose {
-	position:absolute;
-	height:25px;
-	width:25px;
-	border:solid 1px;
-	border-radius:100%;
-	font-size:18pt;
-	font-weight:bold;
-	line-height:26px;
-	text-indent:4px;
-	z-index:1;
-	cursor:default;
-}
-
-div.actionWindow div.actionData {
-	padding:10px;
-	position:absolute;
-	display:inline-block;
-	border:solid 1px;
-	background:lightgray;
-}
-
-div.actionWindow div.actionData ul {
-	list-style-type:none;
-}
-
-.windowDataHalf {
-	width:50%;
-}
-.windowDataFull {
-	width:100%;
 }
 
 /*

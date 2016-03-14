@@ -77,6 +77,7 @@ function stageCharacterSelect() {
 function stageCity(cityId) {
 	//Set the stage
 	$('#stage').empty();
+	$('#stage').css({"background-image":"(../img/citybg.png) repeat"});
 	$('#stage').append('<table class="city"><tbody></tbody></table>');
 	
 	//Map specs
