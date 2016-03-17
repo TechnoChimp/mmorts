@@ -1,6 +1,6 @@
-/*
+/******************
  *  Game Window
- */
+ *****************/
 
 div#game {
 	position:relative;
@@ -114,7 +114,6 @@ div#window_layer {
 }
 
 div#windowWrapper {
-	border:solid 1px;
 	position:absolute;
 	visibility:hidden;
 	display:inline-block;
@@ -173,9 +172,9 @@ div#windowContent ul {
 	width:100%;
 }
 
-/*
+/******************
  *   Stage
- */
+ *****************/
 
 div#stage {
 	position:absolute;
@@ -184,13 +183,13 @@ div#stage {
 	overflow:hidden;
 	width:1280px;
 	height:720px;
-	background-image:#000;
+	background:#000;
 	visibility:hidden;
 }
 
-/*
+/******************
  *  Character Select
- */
+ *****************/
 
 div.charSelect table {
 	position:absolute;
@@ -225,30 +224,19 @@ img.charImage {
 	border:solid 1px black;
 }
 
-/*
+/******************
  * City Map
- */
+ *****************/
 
-div.city {
+table#city {
 	visibility:hidden;
 	position:absolute;
 	display:inline-block;
-}
-
-div.city table.cityMap {
 	border-collapse:collapse;
-	background-color:green;
 }
 
 div.tile {
 	height:128px;
 	width:128px;
-	border:solid 1px;
 	padding:0px;
-}
-
-#capitol {
-	background-image:url('../img/buildings.png');
-	background-position:-292px -185px;
-	background-size:430px 430px;
 }

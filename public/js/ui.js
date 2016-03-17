@@ -1,13 +1,19 @@
-//////
+//////////////////
 //
 // ui.js
 //
 // Contains all functions that relate to the UI, including: windows, status bars, notifications, etc.
 //
-//////
+//////////////////
 
-//////
-// Object: window()
+//////////////////
+//
+// OBJECTS
+//
+//////////////////
+
+//////////////////
+// Object: actionWindow
 
 // Initialize the instance properties
 function actionWindow(size, title, content) {
@@ -23,7 +29,7 @@ actionWindow.prototype = {
 	
 	// displayWindow method will display the window on screen
 	displayWindow: function(_callback) {
-		// Pass object variables to loca variables
+		// Pass object variables to local variables
 		var title = this.title;
 		var contentClass = this.size + 'Window'; // smallWindow, mediumWindow, largeWindow classes
 		var content = this.content;
@@ -50,20 +56,34 @@ actionWindow.prototype = {
 			$('#windowClose').css({"right":closeXPosition,"top":closeYPosition});
 			$('#windowWrapper').css({"visibility":"visible"});
 			
-			// Run callback
-			_callback();
+			// Run callback if required
+			if (_callback) {
+				_callback();
+			}
 		});
 	}
 };
 
-//////
+
+
+
+//////////////////
+//
+// CLICK EVENTS
+//
+//////////////////
+
+//////////////////
 // Click Event: Close Action Window
 
 $('#game').on('click', '#windowClose', function() {
 	$('#window_layer').empty();
 });
 
-//////
+
+
+
+//////////////////
 // Click Event: Inventory
 
 // Create new inventory action window
@@ -79,7 +99,10 @@ $('#game').on('click', '#inventory', function() {
 	});
 });
 
-//////
+
+
+
+//////////////////
 // Click Event: Character Sheet
 
 $('#charimage').click(function() {

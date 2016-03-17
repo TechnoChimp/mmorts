@@ -77,8 +77,8 @@ function stageCharacterSelect() {
 function stageCity(cityId) {
 	//Set the stage
 	$('#stage').empty();
-	$('#stage').css({"background-image":"(../img/citybg.png) repeat"});
-	$('#stage').append('<table class="city"><tbody></tbody></table>');
+	$('#stage').append('<table id="city"><tbody></tbody></table>');
+	$('table#city').css({'background-image':'url("img/citybg.png")'});
 	
 	//Map specs
 	var mapRow = 6;
@@ -91,7 +91,7 @@ function stageCity(cityId) {
 	while (tileX < mapRow) {
 		var currentRow = "row-"+tileX;
 		
-		$('.city tbody').append('<tr class="'+currentRow+'">');
+		$('#city tbody').append('<tr class="'+currentRow+'">');
 		
 		while (tileY < mapCol) {
 			var currentCol = "col-"+tileY;
@@ -102,11 +102,11 @@ function stageCity(cityId) {
 		tileX++;
 	}
 	
-	// This is temporary to place an building - will be replaced with map data
-	$('.row-3 .col-3').replaceWith('<td class="col-3"><div class="tile" id="capitol"></div></td>');
+	// This is temporary to place a building - will be replaced with map data
+	$('.row-3 .col-3').replaceWith('<td class="col-3"><div class="tile bldg1 bldg1-0-0" id="capitol"></div></td>');
 	
 	//Show the map
-	$('.city').css({"visibility":"visible"});
+	$('#city').css({"visibility":"visible"});
 	
 	jQuery.ajax({
 			url: "../api/game/city/"+cityId,
