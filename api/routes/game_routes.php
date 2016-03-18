@@ -112,15 +112,15 @@ $app->get('/game/character/{id}', function(RequestInterface $request, ResponseIn
 $app->get('/game/city/{id}', function(RequestInterface $request, ResponseInterface $response) use($app) {
 	// Get city ID from request
 	$id = $request->getAttribute('id');
-	// NEW Query:
-	// $query = "SELECT  e.type as tile_type, a.x_coord as pos_X, a.y_coord as pos_Y, d.filename as sheet, c.sheet_x_pos as sprite_x, c.sheet_y_pos as sprite_y FROM city_map_tiles a LEFT JOIN cities b ON a.city_id = b.id LEFT JOIN tile c ON a.tile_id = c.id LEFT JOIN image d ON c.image_id = d.id LEFT JOIN tile_type e ON c.tile_type = e.id WHERE b.id = '{$id}'"
-	$query = "SELECT c.id as city_id, c.name as city_name FROM cities c WHERE c.id = '{$id}'";
+	$query = "SELECT b.name as city_name, a.filename as bg_img FROM image a LEFT JOIN cities b ON b.bg_image_id = a.id WHERE b.id = '{$id}'; SELECT e.type as tile_type, a.x_coord as pos_x, a.y_coord as pos_y, d.filename as sheet, c.sheet_x_pos as sprite_x, c.sheet_y_pos as sprite_y FROM city_map_tiles a LEFT JOIN cities b ON a.city_id = b.id LEFT JOIN tile c ON a.tile_id = c.id LEFT JOIN image d ON c.image_id = d.id LEFT JOIN tile_type e ON c.tile_type = e.id WHERE b.id = '{$id}'";
 	
 	// Acquire database connection and perform query
 	global $pdo;
 	$statement = $pdo->query($query);
 	$result = $statement->fetch(PDO::FETCH_ASSOC);
-	
+	$statement->nextRowset();
+	$result += $statement->fetchAll(PDO::FETCH_ASSOC);
+
 	// Return data in JSON format
 	return json_encode($result);
 });

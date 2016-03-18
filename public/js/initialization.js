@@ -47,3 +47,12 @@ jQuery.ajax({
 
 // Initialize buildings
 var building = initObject(building, 6);
+
+
+
+
+//////////////////
+// City
+
+// Initialize city
+var city = initObject(city, 1);
