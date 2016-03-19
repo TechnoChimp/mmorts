@@ -14,7 +14,7 @@ var inv = initObject(invSlot, 9);
 
 // Get inventory data from API and load into objects
 jQuery.ajax({
-			url: "../api/game/character/inventory",
+			url: "api/game/character/inventory",
 			type: "GET",
 			contentType: 'application/json; charset=utf-8',
 			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},

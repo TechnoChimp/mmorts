@@ -30,7 +30,7 @@ $(document).on("click", "#login", function(e) {
 	localStorage.setItem("username", username);
 	
 	$.ajax({
-		url: "../api/game/login",
+		url: "api/game/login",
 		type: "POST",
 		headers: {'Authorization': 'Basic '+basicAuth},
 		success: function(resultdata)

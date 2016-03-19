@@ -36,7 +36,7 @@
 				// Load data into city and building objects
 				// Get inventory data from API and load into objects
 				jQuery.ajax({
-					url: "../api/game/city/" + $(this).attr('cityId'),
+					url: "api/game/city/" + $(this).attr('cityId'),
 					type: "GET",
 					contentType: 'application/json; charset=utf-8',
 					headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},

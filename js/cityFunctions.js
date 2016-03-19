@@ -3,7 +3,7 @@
 
 function getCharacterData(charId) {
 	jQuery.ajax({
-			url: "../api/game/character/"+charId,
+			url: "api/game/character/"+charId,
 			type: "GET",
 			contentType: 'application/json; charset=utf-8',
 			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
@@ -24,7 +24,7 @@ function getCharacterData(charId) {
 function getUserInfo() {
 	var result;
 	jQuery.ajax({
-			url: "../api/game/user",
+			url: "api/game/user",
 			type: "GET",
 			contentType: 'application/json; charset=utf-8',
 			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
@@ -44,7 +44,7 @@ function getUserInfo() {
 function stageCharacterSelect() {
 	$('#game').empty();
 	jQuery.ajax({
-			url: "../api/game/character",
+			url: "api/game/character",
 			type: "GET",
 			contentType: 'application/json; charset=utf-8',
 			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
