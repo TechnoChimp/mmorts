@@ -1,44 +1,4 @@
 //////
-// getCharacterData
-
-function getCharacterData(charId) {
-	jQuery.ajax({
-			url: "api/game/character/"+charId,
-			type: "GET",
-			contentType: 'application/json; charset=utf-8',
-			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
-			success: function(resultData) {
-				
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-			},
-			
-			timeout: 120000,
-		});
-
-}
-
-//////
-// getUserInfo
-
-function getUserInfo() {
-	var result;
-	jQuery.ajax({
-			url: "api/game/user",
-			type: "GET",
-			contentType: 'application/json; charset=utf-8',
-			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
-			success: function(resultData) {
-				
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-			},
-			
-			timeout: 120000,
-		});
-}
-
-//////
 // stageCharacterSelect
 
 function stageCharacterSelect() {
@@ -55,10 +15,19 @@ function stageCharacterSelect() {
 				// Load empty character select sheet
 				$('#game').load('pages/gamesheets/characterselect.html', function () {
 					for (i = 0; i < charData.length; i++) {
+						// Get variables from result
+						var charName = charData[i].char_name;
+						var charId = charData[i].char_id;
+						var cityId = charData[i].city_id;
+						var charImg = charData[i].char_img;
+						var charLevel = charData[i].char_level;
+						var cityName = charData[i].city_name;
+						
+						
 						// Load character onto sheet for each character in data
-						$('.charSelect table tr').eq(0).append('<th>'+charData[i].char_name+'</th>');
+						$('.charSelect table tr').eq(0).prepend('<th>'+charName+'</th>');
 						// Load character Id and city Id into DOM for later use
-						$('.charSelect table tr').eq(1).append('<td><div class="character" charId="'+charData[i].char_id+'" cityId="'+charData[i].city_id+'"><img class="charImage" src="img/char1.jpg" /><ul class="charSpec"><li>Level: '+charData[i].char_level+'<li>City: '+charData[i].city_name+'</ul></div></td>');
+						$('.charSelect table tr').eq(1).prepend('<td><div class="character" charId="'+charId+'" cityId="'+cityId+'"><img class="charImage" src="img/'+charImg+'" /><ul class="charSpec"><li>Level: '+charLevel+'<li>City: '+cityName+'</ul></div></td>');
 					}
 				});
 			},

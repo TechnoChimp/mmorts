@@ -26,76 +26,83 @@
 
 			// Select character and load character, city, and buildings
 			$('#game').on('click', '.character', function() {
-				// Set the characterId and cityID into localStorage
-				//----------Replace this with a player object
-				localStorage.setItem('charId', $(this).attr('charId'));
-				//----------Replace this with a city object
-				localStorage.setItem('cityId', $(this).attr('cityId'));
-				var cityId = localStorage.getItem('city_id');
+				// If new character is selected, launch character creation
+				if (!($(this).attr('charId'))) {
+					$('#game').empty();
+					$('#game').load('pages/gamesheets/charactercreation.html');
+				} else {
 				
-				// Load data into city and building objects
-				// Get inventory data from API and load into objects
-				jQuery.ajax({
-					url: "api/game/city/" + $(this).attr('cityId'),
-					type: "GET",
-					contentType: 'application/json; charset=utf-8',
-					headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
-					success: function(resultData) {
-						// Convert response to array and pull city data
-						var cityData = JSON.parse(resultData);
-						var cityName = cityData.city_name;
-						var bgImg = cityData.bg_img;
-
-						// Set the city object
-						city[0].setCity(cityName, bgImg);
-						
-						// Determine building count by counting the number of keys and removing the number of non-building keys
-						// Data is structured as [0:{Building1 Data}, 1:{Building2 Data}, ...etc, city_name: "", bg_img: ""]
-						// At this time we're returning building plus two additional values for the city, so building count will
-						//   be the number of keys in cityData - 2.
-						var buildingCount = Object.keys(cityData).length - 2;
-
-						// Loop through the buildings and set the values of the building objects.
-						for (var i = 0; i < buildingCount; i++) {
-							// Pull each variable from array
-							var name = cityData[i].tile_type;
-							var spriteSheet = cityData[i].sheet;
-							var spriteXCoord = cityData[i].sprite_x;
-							var spriteYCoord = cityData[i].sprite_y;
-							var posX = cityData[i].pos_x;
-							var posY = cityData[i].pos_y;
-							
-							// Pass variables to building object
-							building[i].setBuilding(name, spriteSheet, spriteXCoord, spriteYCoord, posX, posY);
-						}
-						
-						// Clear the game board and setup the game
-						$('#game').empty();
-						$('#game').append('<div id="game_ui"></div>');
-						$('#game_ui').load('pages/gamesheets/ui.html');
-						$('#game').append('<div id="stage"></div><div id="window_layer"></div>');
-						
-						// Stage the city
-						city[0].getCity(function() {
-							// Place the buildings
-							for (var i = 0; i < 6; i++) {
-								building[i].getBuilding();
-							}
-						});						
-					},
-					error : function(jqXHR, textStatus, errorThrown) {
-					},
+					// Set the characterId and cityID into localStorage
+					//----------Replace this with a player object
+					localStorage.setItem('charId', $(this).attr('charId'));
+					//----------Replace this with a city object
+					localStorage.setItem('cityId', $(this).attr('cityId'));
+					var cityId = localStorage.getItem('city_id');
 					
-					timeout: 120000,
-				});
-				
-				
-				
-				// Set the city stage
-				//stageCity(localStorage.getItem('cityId'));
-				
-				
+					// Load data into city and building objects
+					// Get inventory data from API and load into objects
+					jQuery.ajax({
+						url: "api/game/city/" + $(this).attr('cityId'),
+						type: "GET",
+						contentType: 'application/json; charset=utf-8',
+						headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
+						success: function(resultData) {
+							// Convert response to array and pull city data
+							var cityData = JSON.parse(resultData);
+							var cityName = cityData.city_name;
+							var bgImg = cityData.bg_img;
+	
+							// Set the city object
+							city[0].setCity(cityName, bgImg);
+							
+							// Determine building count by counting the number of keys and removing the number of non-building keys
+							// Data is structured as [0:{Building1 Data}, 1:{Building2 Data}, ...etc, city_name: "", bg_img: ""]
+							// At this time we're returning building plus two additional values for the city, so building count will
+							//   be the number of keys in cityData - 2.
+							var buildingCount = Object.keys(cityData).length - 2;
+	
+							// Loop through the buildings and set the values of the building objects.
+							for (var i = 0; i < buildingCount; i++) {
+								// Pull each variable from array
+								var name = cityData[i].tile_type;
+								var spriteSheet = cityData[i].sheet;
+								var spriteXCoord = cityData[i].sprite_x;
+								var spriteYCoord = cityData[i].sprite_y;
+								var posX = cityData[i].pos_x;
+								var posY = cityData[i].pos_y;
+								
+								// Pass variables to building object
+								building[i].setBuilding(name, spriteSheet, spriteXCoord, spriteYCoord, posX, posY);
+							}
+							
+							// Clear the game board and setup the game
+							$('#game').empty();
+							$('#game').append('<div id="game_ui"></div>');
+							$('#game_ui').load('pages/gamesheets/ui.html');
+							$('#game').append('<div id="stage"></div><div id="window_layer"></div>');
+							
+							// Stage the city
+							city[0].getCity(function() {
+								// Place the buildings
+								for (var i = 0; i < 6; i++) {
+									building[i].getBuilding();
+								}
+							});						
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+						},
+						
+						timeout: 120000,
+					});
+					
+					
+					
+					// Set the city stage
+					//stageCity(localStorage.getItem('cityId'));
+					
+				}
 			});
 		}
+		
 	});
 </script>

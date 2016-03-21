@@ -190,15 +190,22 @@ div#stage {
 /******************
  *  Character Select
  *****************/
+div.charSelect {
+	position:relative;
+	border:solid 1px;
+	width:1280px;
+	height:720px;
+	overflow-x:auto;
+	overflow-y:hidden;
+}
 
 div.charSelect table {
 	position:absolute;
-	top:10px;
-	left:30px;
+	margin:10px;
 	height:700px;
 	background:lightgray;
-	max-width:1200px;
 	text-align:center;
+
 }
 
 div.charSelect table th{
@@ -215,13 +222,129 @@ div.charSelect table div.character ul.charSpec {
 	list-style:none;
 	font-size:16pt;
 	font-weight:bold;
+	
 }
 
 img.charImage {
 	width:350px;
 	height:500px;
-	background:white;
+	background:#EDE6E0;
 	border:solid 1px black;
+}
+
+/******************
+ *  Character Creation
+ *****************/
+div#createCharacter {
+	position: absolute;
+	top:50%;
+	left:20px;
+	width:1240px;
+	height:640px;
+	transform:translateY(-50%);
+	background:lightgray;
+	display:inline-block;
+}
+
+div#createCharacter h2 {
+	margin:2px;
+	font-size:14pt;
+	text-align:center;
+}
+
+/* Main Divs */
+
+div#createCharacter div#charDetail {
+	display:inline-block;
+	height:640px;
+}
+
+div#createCharacter div#classDetail {
+	display:inline-block;
+	position:absolute;
+	top:0px;
+	right:0px;
+	padding-top:30px;
+	width:450px;
+	height:610px;
+}
+
+div#createCharacter div#submitCharacter {
+	display:inline-block;
+	position:absolute;
+	bottom:40px;
+	right:175px;
+	width:100px;
+	height:30px;
+	border:solid 1px;
+	background:gray;
+	cursor:default;
+	text-align:center;
+	font-size:18px;
+	font-weight:bold;
+	line-height:30px;
+}
+
+/* Character Detail Table */
+
+div#createCharacter table#charTable {
+	margin:5% 0;
+}
+
+div#createCharacter img#charImage {
+	width:350px;
+	height:500px;
+	background:#EDE6E0;
+	border:solid 1px black;
+}
+
+div#createCharacter input#charName {
+	width:250px;
+	height:30px;
+	font-size:18pt;
+	text-align:center;
+}
+
+/* Class Selection */
+
+div#createCharacter div#classList {
+	position:absolute;
+	top:60px;
+	width:100px;
+	display:inline-block;
+}
+
+
+div#createCharacter div#classDetail ul {
+	list-style:none;
+	margin:0px;
+}
+
+div#createCharacter div#classDetail ul li {
+	padding:5px;
+	border:solid 1px;
+	border-radius:5px 0px 0px 5px;
+	cursor:default;
+}
+
+div#createCharacter div#classDetail li.active {
+	background:gray;
+}
+
+div#createCharacter div#classDesc {
+	position:absolute;
+	top:60px;
+	right:20px;
+	width:329px;
+	height:400px;
+	display:inline-block;
+	overflow-y:auto;
+	border:solid 1px;
+	background:gray;
+}
+
+div#createCharacter div#classDesc p {
+	margin:16px;
 }
 
 /******************

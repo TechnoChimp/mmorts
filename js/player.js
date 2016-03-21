@@ -85,3 +85,48 @@ invSlot.prototype.setSlot = function(qty, name, desc, img) {
 	this.qty = qty;
 	item.call(this, name, desc, img);
 };
+
+
+
+
+//////////////////
+//
+// CLICK EVENTS
+//
+//////////////////
+
+//////////////////
+// Character Creation
+
+// Click capitol building (will be expanded to consume the click of any building, using just the capitol for testing)
+$('#game').on('click', '#createCharacter #submitCharacter', function() {
+	// Get character data from user input
+	var charName = $('#charName').val();
+	var charImgId = $('#charImage').attr('charImg');
+	var charData = {
+		charName:charName,
+		charImgId:charImgId
+	};
+	jsonData = JSON.stringify(charData);
+	
+	// Perform character creation post request
+	jQuery.ajax({
+		url: "api/game/character",
+		type: "POST",
+		contentType: 'application/json; charset=utf-8',
+		data: jsonData,
+		datatype : 'application/json',
+		headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
+		success: function(resultData) {	
+			// Reload the character select screen
+			stageCharacterSelect();
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			if (jqXHR.status == '409') {
+				// Write error message to screen (character name already in use)
+			}
+		},
+		
+		timeout: 120000,
+	});
+});
