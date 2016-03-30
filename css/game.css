@@ -90,12 +90,19 @@ div#inventory {
 	z-index:10;
 }
 
-table#invTable {
-	border-collapse:collapse;
+div#invBox {
+	height:100%;
+	overflow-y:auto;
 }
 
-table#invTable, table#invTable td {
+table#invTable {
+	margin:0 auto;
+	border-collapse:separate;
+}
+
+table#invTable td {
 	border:1px solid black;
+	border-radius:10px;
 }
 
 table#invTable td {
@@ -158,7 +165,7 @@ div#windowContent {
 	position:absolute;
 	display:inline-block;
 	border:solid 1px;
-	background:lightgray;
+	background-image:url("../img/window_bg.png");
 }
 
 div#windowContent ul {

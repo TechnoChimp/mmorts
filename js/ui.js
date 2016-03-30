@@ -90,7 +90,7 @@ $('#game').on('click', '#windowClose', function() {
 $('#game').on('click', '#inventory', function() {
 	// Get the inventory structure from file
 	$.get('pages/gamesheets/inventory.html', function(invSheet) {
-		invWindow = new actionWindow('medium', 'Inventory', invSheet);
+		invWindow = new actionWindow('small', 'Inventory', invSheet);
 		invWindow.displayWindow(function() {
 			for (var i = 0; i < 9; i++) {
 				inv[i].getSlot();
