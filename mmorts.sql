@@ -20,19 +20,21 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(32) COLLATE latin1_general_ci NOT NULL,
   `user_id` int(11) NOT NULL,
-  `chartype_id` int(11) NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `char_img_id` int(11) NOT NULL,
+  `char_type_id` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   `exp` int(11) NOT NULL,
   `silver` int(11) NOT NULL,
-  `inv_id` int(11) NOT NULL,
-  `city_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `id` (`id`),
   KEY `user_id` (`user_id`),
   KEY `city_id` (`city_id`),
+  KEY `FK_characters_image` (`char_img_id`),
   CONSTRAINT `characters_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `characters_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+  CONSTRAINT `characters_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  CONSTRAINT `FK_characters_image` FOREIGN KEY (`char_img_id`) REFERENCES `image` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- Data exporting was unselected.
@@ -51,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `cities` (
   `position_5` int(11) DEFAULT NULL,
   `tax_level` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
   KEY `id` (`id`),
   KEY `position_1` (`position_1`),
   KEY `position_2` (`position_2`),
@@ -58,12 +61,12 @@ CREATE TABLE IF NOT EXISTS `cities` (
   KEY `position_4` (`position_4`),
   KEY `position_5` (`position_5`),
   KEY `bg_image_id` (`bg_image_id`),
-  CONSTRAINT `FK_cities_image` FOREIGN KEY (`bg_image_id`) REFERENCES `image` (`id`),
   CONSTRAINT `cities_ibfk_1` FOREIGN KEY (`position_1`) REFERENCES `characters` (`id`),
   CONSTRAINT `cities_ibfk_2` FOREIGN KEY (`position_2`) REFERENCES `characters` (`id`),
   CONSTRAINT `cities_ibfk_3` FOREIGN KEY (`position_3`) REFERENCES `characters` (`id`),
   CONSTRAINT `cities_ibfk_4` FOREIGN KEY (`position_4`) REFERENCES `characters` (`id`),
-  CONSTRAINT `cities_ibfk_5` FOREIGN KEY (`position_5`) REFERENCES `characters` (`id`)
+  CONSTRAINT `cities_ibfk_5` FOREIGN KEY (`position_5`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_cities_image` FOREIGN KEY (`bg_image_id`) REFERENCES `image` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- Data exporting was unselected.
@@ -80,8 +83,8 @@ CREATE TABLE IF NOT EXISTS `city_map_tiles` (
   KEY `id` (`id`),
   KEY `cities_id` (`city_id`),
   KEY `tile_id` (`tile_id`),
-  CONSTRAINT `FK_city_map_tiles_tile` FOREIGN KEY (`tile_id`) REFERENCES `tile` (`id`),
-  CONSTRAINT `FK_city_map_tiles_city` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+  CONSTRAINT `FK_city_map_tiles_city` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  CONSTRAINT `FK_city_map_tiles_tile` FOREIGN KEY (`tile_id`) REFERENCES `tile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- Data exporting was unselected.
@@ -110,7 +113,6 @@ CREATE TABLE IF NOT EXISTS `img_type` (
   `type` varchar(16) COLLATE latin1_general_ci NOT NULL,
   `sub_type` varchar(16) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `type` (`type`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -159,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `tile` (
   `sheet_x_pos` int(3) NOT NULL,
   `sheet_y_pos` int(3) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
   KEY `id` (`id`),
   KEY `image_id` (`image_id`),
   KEY `tile_type` (`tile_type`),
