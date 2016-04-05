@@ -15,6 +15,19 @@ use Psr\Http\Message\ResponseInterface;
 
 //////////////////
 //
+// TEST ROUTE
+//
+//////////////////
+
+$app->get('/game/test', function(RequestInterface $request, ResponseInterface $response) use($app) {
+	echo rollD20();
+});
+
+
+
+
+//////////////////
+//
 // GET ROUTES
 //
 //////////////////

@@ -115,3 +115,27 @@ $('#charimage').click(function() {
 	
 	$('#charsheet').html(charData);
 });
+
+
+
+
+//////////////////
+// Click Event: Quest Journal
+
+// Create new inventory action window
+$('#game').on('click', '#journal', function() {
+	$('#window_layer').load('pages/gamesheets/questwindow.html', function(invSheet) {
+	
+		$('.scrollbox').enscroll({
+				verticalTrackClass: 'track',
+				verticalHandleClass: 'handle',
+				drawScrollButtons: true,
+				scrollUpButtonClass: 'scroll-up',
+				scrollDownButtonClass: 'scroll-down'
+			});
+
+		$('#questWindow').on('click', '.button', function() {
+			console.log('Accept button clicked.');
+		});
+	});
+});

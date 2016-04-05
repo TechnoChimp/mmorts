@@ -111,6 +111,18 @@ table#invTable td {
 	height:60px;
 }
 
+/* Quest Journal */
+
+div#journal {
+	width:60px;
+	height:60px;
+	background:url("../img/journal_icon.png");
+	position:absolute;
+	top:178px;
+	left:4px;
+	z-index:10;
+}
+
 /* Window */
 
 div#window_layer {
@@ -165,7 +177,7 @@ div#windowContent {
 	position:absolute;
 	display:inline-block;
 	border:solid 1px;
-	background-image:url("../img/window_bg.png");
+	background-image:url("../img/window_bg.jpg");
 }
 
 div#windowContent ul {
@@ -369,4 +381,173 @@ div.tile {
 	height:128px;
 	width:128px;
 	padding:0px;
+}
+
+/******************
+ * City Map
+ *****************/
+
+#questWindow {
+	display:inline-block;
+	position:absolute;
+/* Positioning Temporary for Testing */
+	top:100px;
+	left:400px;
+	width:274px;
+	height:424px;
+	background:url('../img/window.png');
+}
+#questWindow * {
+	cursor:default;
+}
+#questWindow .title{
+	margin:0;
+	position:absolute;
+	top:14px;
+	left:85px;
+	width:100px;
+	height:14px;
+	text-align:center;
+	color:midnightblue;
+	font-size:11pt;
+	font-variant:small-caps;
+	font-weight:bold;
+	line-height:14px;
+	text-shadow:-2px 2px lightskyblue;
+}
+#questWindow .close {
+	position:absolute;
+	top:0px;
+	right:5px;
+	height:24px;
+	width:24px;
+	border-radius:100%;
+}
+
+#questWindow .questContent-head, #questWindow .questContent-foot {
+	position:absolute;
+	width:238px;
+	background:url('../img/window.png')  -274px 0 no-repeat;
+	z-index:1;
+}
+#questWindow .questContent-head {
+	top:50px;
+	left:8px;
+	height:35px;
+	
+}
+#questWindow .questContent .quest {
+	margin:10px 0;
+	padding:0 15px;
+	font-size:14pt;
+	font-variant:small-caps;
+	font-weight:bold;
+}
+#questWindow .questContent{
+	width:238px;
+	height:337px;
+}
+#questWindow .questContent p {
+	margin-top:10px;
+	padding:15px;
+	padding-top:0;
+	font-size:12px;
+}
+#questWindow .questContent-foot{
+	bottom:12px;
+	left:8px;
+	height:20px;
+	background-position:-274px -343px;
+}
+#questWindow .scrollbox{
+	position:relative;
+	top:50px;
+	left:8px;
+	width:262px;
+	height:312px;
+	padding:25px 0;
+	background:url('../img/window.png') -274px 0 no-repeat;
+	overflow:auto;
+}
+#questWindow .track {
+	width:22px;
+	background:url('../img/window.png') -773px 0 no-repeat;
+}
+#questWindow .handle {
+	width:16px;
+	margin-left:3px;
+	background:url('../img/window.png') -795px 0 no-repeat;
+	cursor:default;
+}
+#questWindow .handle .top, #questWindow .handle .bottom {
+    position: absolute;
+    left: 0;
+    width: 16px;
+    height: 7px;
+    background: url('../img/window.png') no-repeat;
+}
+#questWindow .handle .top {
+    top: 0;
+    background-position:-795px 0;
+}
+#questWindow .handle .bottom {
+    bottom: 0;
+    width: 16px;
+    height: 7px;
+    background-position:-795px -311px;
+}
+#questWindow .scroll-up, #questWindow .scroll-down {
+    width: 22px;
+    height: 22px;
+}
+#questWindow .scroll-up {
+    background: url('../img/window.png') -274px -391px no-repeat;
+}
+#questWindow .scroll-up:hover {
+    background-position: -296px -391px;
+}
+#questWindow .scroll-down {
+    background: url('../img/window.png') -318px -391px no-repeat;
+}
+#questWindow .scroll-down:hover {
+    background-position: -340px -391px;
+}
+#questWindow .dragging {
+	cursor:default;
+}
+
+#questWindow .rewards {
+	
+}
+#questWindow .rewards p {
+	text-align:center;
+	font-size:12pt;
+	font-variant:small-caps;
+	text-decoration:underline;
+	font-weight:bold;
+}
+#questWindow .rewards .item {
+	display:inline-block;
+	margin-left:10px;
+	width:60px;
+	height:60px;
+	border:solid 1px black;
+	border-radius:15px;
+	background-color:black;
+}
+#questWindow .button {
+	margin:30px auto;
+	width:88px;
+	height:27px;
+	background: url('../img/window.png') -274px -363px no-repeat;
+	margin-bottom:25px;
+	
+}
+#questWindow .button p {
+	text-align:center;
+	color:ivory;
+	font-size:14pt;
+	font-variant:small-caps;
+	font-weight:bold;
+	line-height:27px;
 }

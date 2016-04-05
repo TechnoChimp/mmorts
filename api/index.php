@@ -2,13 +2,8 @@
 // Load Slim components
 require 'vendor/autoload.php';
 
-// Establish database connection
-$host	= 'localhost';
-$dbname	= 'mmorts';
-$user	= 'root';
-$pass	= '';
-$pdo = new \PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Load global functions
+require 'global/globalfunctions.php';
 
 // Create slim app and link routes files
 $app = new \Slim\App();
