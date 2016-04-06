@@ -16,11 +16,12 @@
 // Object: actionWindow
 
 // Initialize the instance properties
-function actionWindow(size, title, content) {
+function actionWindow(size, title, content, page) {
 	// Define object variables ('this' being the instance of the object that gets instanciated)
 	this.size = size; // Acceptable sizes include: small, medium, large
 	this.title = title;
 	this.content = content; //------Write up standard around acceptable window content types.
+	this.page = page;
 }
 
 // Overwrite prototype with custom methods
@@ -61,8 +62,55 @@ actionWindow.prototype = {
 				_callback();
 			}
 		});
+	},
+	
+	// newWindow method will display a new window on screen
+	newWindow: function(_callback) {
+		var page = this.page;
+		
+		$('#window_layer').load('pages/gamesheets/'+page+'.html', function() {
+		$('.scrollbox').enscroll({
+				verticalTrackClass: 'track',
+				verticalHandleClass: 'handle',
+				drawScrollButtons: true,
+				scrollUpButtonClass: 'scroll-up',
+				scrollDownButtonClass: 'scroll-down'
+		});
+		
+		// Run callback if required
+			if (_callback) {
+				_callback();
+			}
+	});
 	}
 };
+
+
+
+
+//////////////////
+//
+// FUNCTIONS
+//
+//////////////////
+
+//////////////////
+// Function: windowScroll(page, _callback)
+
+function windowScroll(page, _callback) {
+	$('#window_layer').load('pages/gamesheets/'+page+'.html', function() {
+		$('.scrollbox').enscroll({
+				verticalTrackClass: 'track',
+				verticalHandleClass: 'handle',
+				drawScrollButtons: true,
+				scrollUpButtonClass: 'scroll-up',
+				scrollDownButtonClass: 'scroll-down'
+		});
+		if (typeof _callback !== 'undefined') {
+			_callback();
+		}
+	});
+}
 
 
 
@@ -88,14 +136,11 @@ $('#game').on('click', '#windowClose', function() {
 
 // Create new inventory action window
 $('#game').on('click', '#inventory', function() {
-	// Get the inventory structure from file
-	$.get('pages/gamesheets/inventory.html', function(invSheet) {
-		invWindow = new actionWindow('small', 'Inventory', invSheet);
-		invWindow.displayWindow(function() {
-			for (var i = 0; i < 9; i++) {
-				inv[i].getSlot();
-			}
-		});
+	invWindow = new actionWindow('', '', '', 'inventory');
+	invWindow.newWindow(function() {
+		for (var i = 0; i < 9; i++) {
+			inv[i].getSlot();
+		}
 	});
 });
 
@@ -122,20 +167,11 @@ $('#charimage').click(function() {
 //////////////////
 // Click Event: Quest Journal
 
-// Create new inventory action window
+// Create new quest journal window
 $('#game').on('click', '#journal', function() {
-	$('#window_layer').load('pages/gamesheets/questwindow.html', function(invSheet) {
-	
-		$('.scrollbox').enscroll({
-				verticalTrackClass: 'track',
-				verticalHandleClass: 'handle',
-				drawScrollButtons: true,
-				scrollUpButtonClass: 'scroll-up',
-				scrollDownButtonClass: 'scroll-down'
-			});
-
-		$('#questWindow').on('click', '.button', function() {
-			console.log('Accept button clicked.');
-		});
+	journalWindow = new actionWindow('', '', '', 'questwindow');
+	journalWindow.newWindow();
+	$('#questWindow').on('click', '.button', function() {
+		console.log('Accept button clicked.');
 	});
 });

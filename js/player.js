@@ -73,11 +73,14 @@ inheritPrototype(invSlot, item);
 invSlot.prototype.getSlot = function() {
 	var slot = '#invSlot' + this.slot;
 	var img = this.img;
+	var qty = this.qty;
 	if (typeof img != 'undefined') {
 		sheet = img.split("-",1);
 		$(slot).addClass(sheet + ' ' + img);
+		if (qty > 0) {
+			$(slot).html(qty);
+		}
 	}
-	//----------Add in logic here to include an item count if > 0. 0 indicates the item does not stack.
 };
 
 // setSlot will update the properties of the invSlot and attached item object

@@ -10,9 +10,9 @@ div#game {
 	overflow:hidden;
 }
 
-/*
+/******************
  *  Game UI
- */
+ *****************/
 
 /* Character Sheet */
 div#character {
@@ -59,6 +59,30 @@ div#charsheet {
 	background:#aaa;
 }
 
+/* Journal */
+
+div#journal {
+	width:60px;
+	height:60px;
+	background:url("../img/journal_icon.png");
+	position:absolute;
+	top:178px;
+	left:4px;
+	z-index:10;
+}
+
+/* Inventory */
+
+div#inventory {
+	width:60px;
+	height:60px;
+	background:url("../img/inventory_icon.png");
+	position:absolute;
+	top:110px;
+	left:4px;
+	z-index:10;
+}
+
 /* Stage Title */
 
 div#stageTitle {
@@ -78,49 +102,18 @@ div#stageTitle {
 	cursor:default;
 }
 
-/* Inventory Sheet */
+/* Window Close */
 
-div#inventory {
-	width:64px;
-	height:64px;
-	background:url("../img/inventory_icon.png");
+#windowClose {
 	position:absolute;
-	top:108px;
-	left:4px;
-	z-index:10;
-}
-
-div#invBox {
-	height:100%;
-	overflow-y:auto;
-}
-
-table#invTable {
-	margin:0 auto;
-	border-collapse:separate;
-}
-
-table#invTable td {
-	border:1px solid black;
-	border-radius:10px;
-}
-
-table#invTable td {
-	padding:0px;
-	width:60px;
-	height:60px;
-}
-
-/* Quest Journal */
-
-div#journal {
-	width:60px;
-	height:60px;
-	background:url("../img/journal_icon.png");
-	position:absolute;
-	top:178px;
-	left:4px;
-	z-index:10;
+	top:0px;
+	right:5px;
+	height:24px;
+	width:24px;
+	border-radius:100%;
+/* border and x-index temporary - remove after replacing building windows */
+	border: solid 1px black;
+    z-index: 1;
 }
 
 /* Window */
@@ -156,20 +149,6 @@ div#windowTitle {
 	font-size:18px;
 	font-weight:bold;
 	line-height:25px;
-}
-
-div#windowClose {
-	position:absolute;
-	height:25px;
-	width:25px;
-	border:solid 1px;
-	border-radius:100%;
-	font-size:18pt;
-	font-weight:bold;
-	line-height:26px;
-	text-indent:4px;
-	z-index:1;
-	cursor:default;
 }
 
 div#windowContent {
@@ -254,6 +233,7 @@ img.charImage {
 /******************
  *  Character Creation
  *****************/
+
 div#createCharacter {
 	position: absolute;
 	top:50%;
@@ -384,7 +364,7 @@ div.tile {
 }
 
 /******************
- * City Map
+ * Quest Window
  *****************/
 
 #questWindow {
@@ -397,14 +377,16 @@ div.tile {
 	height:424px;
 	background:url('../img/window.png');
 }
+
 #questWindow * {
 	cursor:default;
 }
+
 #questWindow .title{
 	margin:0;
 	position:absolute;
 	top:14px;
-	left:85px;
+	left:88px;
 	width:100px;
 	height:14px;
 	text-align:center;
@@ -415,14 +397,8 @@ div.tile {
 	line-height:14px;
 	text-shadow:-2px 2px lightskyblue;
 }
-#questWindow .close {
-	position:absolute;
-	top:0px;
-	right:5px;
-	height:24px;
-	width:24px;
-	border-radius:100%;
-}
+
+
 
 #questWindow .questContent-head, #questWindow .questContent-foot {
 	position:absolute;
@@ -430,12 +406,13 @@ div.tile {
 	background:url('../img/window.png')  -274px 0 no-repeat;
 	z-index:1;
 }
+
 #questWindow .questContent-head {
 	top:50px;
 	left:8px;
 	height:35px;
-	
 }
+
 #questWindow .questContent .quest {
 	margin:10px 0;
 	padding:0 15px;
@@ -443,22 +420,26 @@ div.tile {
 	font-variant:small-caps;
 	font-weight:bold;
 }
+
 #questWindow .questContent{
 	width:238px;
 	height:337px;
 }
+
 #questWindow .questContent p {
 	margin-top:10px;
 	padding:15px;
 	padding-top:0;
 	font-size:12px;
 }
+
 #questWindow .questContent-foot{
 	bottom:12px;
 	left:8px;
 	height:20px;
 	background-position:-274px -343px;
 }
+
 #questWindow .scrollbox{
 	position:relative;
 	top:50px;
@@ -469,16 +450,19 @@ div.tile {
 	background:url('../img/window.png') -274px 0 no-repeat;
 	overflow:auto;
 }
+
 #questWindow .track {
 	width:22px;
 	background:url('../img/window.png') -773px 0 no-repeat;
 }
+
 #questWindow .handle {
 	width:16px;
 	margin-left:3px;
 	background:url('../img/window.png') -795px 0 no-repeat;
 	cursor:default;
 }
+
 #questWindow .handle .top, #questWindow .handle .bottom {
     position: absolute;
     left: 0;
@@ -486,39 +470,40 @@ div.tile {
     height: 7px;
     background: url('../img/window.png') no-repeat;
 }
+
 #questWindow .handle .top {
     top: 0;
     background-position:-795px 0;
 }
+
 #questWindow .handle .bottom {
     bottom: 0;
     width: 16px;
     height: 7px;
     background-position:-795px -311px;
 }
+
 #questWindow .scroll-up, #questWindow .scroll-down {
     width: 22px;
     height: 22px;
 }
+
 #questWindow .scroll-up {
     background: url('../img/window.png') -274px -391px no-repeat;
 }
+
 #questWindow .scroll-up:hover {
     background-position: -296px -391px;
 }
+
 #questWindow .scroll-down {
     background: url('../img/window.png') -318px -391px no-repeat;
 }
+
 #questWindow .scroll-down:hover {
     background-position: -340px -391px;
 }
-#questWindow .dragging {
-	cursor:default;
-}
 
-#questWindow .rewards {
-	
-}
 #questWindow .rewards p {
 	text-align:center;
 	font-size:12pt;
@@ -526,6 +511,7 @@ div.tile {
 	text-decoration:underline;
 	font-weight:bold;
 }
+
 #questWindow .rewards .item {
 	display:inline-block;
 	margin-left:10px;
@@ -535,14 +521,15 @@ div.tile {
 	border-radius:15px;
 	background-color:black;
 }
+
 #questWindow .button {
 	margin:30px auto;
 	width:88px;
 	height:27px;
 	background: url('../img/window.png') -274px -363px no-repeat;
 	margin-bottom:25px;
-	
 }
+
 #questWindow .button p {
 	text-align:center;
 	color:ivory;
@@ -550,4 +537,157 @@ div.tile {
 	font-variant:small-caps;
 	font-weight:bold;
 	line-height:27px;
+}
+
+/******************
+ * Inventory Sheet
+ *****************/
+
+#invSheet {
+	display:inline-block;
+	position:relative;
+/* Positioning Temporary for Testing */
+	top:100px;
+	left:400px;
+	width:274px;
+	height:424px;
+	background:url('../img/window.png');
+}
+
+#invSheet * {
+	cursor:default;
+}
+
+#invSheet .title{
+	margin:0;
+	position:absolute;
+	top:14px;
+	left:88px;
+	width:100px;
+	height:14px;
+	text-align:center;
+	color:midnightblue;
+	font-size:11pt;
+	font-variant:small-caps;
+	font-weight:bold;
+	line-height:14px;
+	text-shadow:-2px 2px lightskyblue;
+}
+
+#invSheet .close {
+	position:absolute;
+	top:0px;
+	right:5px;
+	height:24px;
+	width:24px;
+	border-radius:100%;
+}
+
+#invSheet .invContent-head, #invSheet .invContent-foot {
+	position:absolute;
+	width:238px;
+	background:url('../img/window.png')  -512px 0 no-repeat;
+	z-index:1;
+}
+
+#invSheet .invContent-head {
+	top:50px;
+	left:8px;
+	height:10px;
+	
+}
+
+#invSheet .invContent{
+	width:238px;
+	height:337px;
+}
+
+#invSheet .invContent-foot{
+	bottom:12px;
+	left:8px;
+	height:10px;
+	background-position:-512px -353px;
+}
+
+#invSheet .scrollbox{
+	position:relative;
+	top:50px;
+	left:8px;
+	width:262px;
+	height:342px;
+	padding:10px 0;
+	background:url('../img/window.png') -512px 0 no-repeat;
+	overflow:auto;
+}
+
+#invSheet .track {
+	width:22px;
+	background:url('../img/window.png') -773px 0 no-repeat;
+}
+
+#invSheet .handle {
+	width:16px;
+	margin-left:3px;
+	background:url('../img/window.png') -795px 0 no-repeat;
+	cursor:default;
+}
+
+#invSheet .handle .top, #invSheet .handle .bottom {
+    position: absolute;
+    left: 0;
+    width: 16px;
+    height: 7px;
+    background: url('../img/window.png') no-repeat;
+}
+
+#invSheet .handle .top {
+    top: 0;
+    background-position:-795px 0;
+}
+
+#invSheet .handle .bottom {
+    bottom: 0;
+    width: 16px;
+    height: 7px;
+    background-position:-795px -311px;
+}
+
+#invSheet .scroll-up, #invSheet .scroll-down {
+    width: 22px;
+    height: 22px;
+}
+
+#invSheet .scroll-up {
+    background: url('../img/window.png') -274px -391px no-repeat;
+}
+
+#invSheet .scroll-up:hover {
+    background-position: -296px -391px;
+}
+
+#invSheet .scroll-down {
+    background: url('../img/window.png') -318px -391px no-repeat;
+}
+
+#invSheet .scroll-down:hover {
+    background-position: -340px -391px;
+}
+
+#invSheet .inventory {
+	margin:15px auto;
+	margin-top:0;
+}
+
+#invSheet .inventory td {
+	padding:0;
+	width:40px;
+	height:40px;
+	border-radius:10px;
+	background-color:black;
+	color:ghostwhite;
+	text-shadow:slateblue -1px 1px;
+	font-size:10pt;
+	font-weight:bold;
+	text-align:right;
+	vertical-align:bottom;
 }
