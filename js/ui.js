@@ -81,7 +81,7 @@ actionWindow.prototype = {
 			if (_callback) {
 				_callback();
 			}
-	});
+		});
 	}
 };
 

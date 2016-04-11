@@ -7,6 +7,62 @@
 //////////////////
 
 //////////////////
+//
+// FUNCTIONS
+//
+//////////////////
+
+//////////////////
+// Function: initObject
+
+// Creates new array of objects from the object provided
+function initObject(obj, num) {
+	var a = [];
+	for (var i = 0; i < num; i++) {
+		a[i] = new obj(i);
+	}
+	return a;
+}
+
+
+
+
+//////////////////
+//
+// INITIALIZATION
+//
+//////////////////
+
+//////////////////
+// Buildings
+
+// Initialize buildings
+var building = initObject(building, 6);
+
+
+
+
+//////////////////
+// City
+
+// Initialize city
+var city = initObject(city, 1);
+
+
+
+
+//////////////////
+// Quest System
+
+// Initialize quest and quest goal as an empty array
+// Quests and goals will be added as needed
+var questList = [];
+var questGoalList = [];
+
+
+
+
+//////////////////
 // Inventory
 
 // Initialize player inventory
@@ -42,17 +98,8 @@ jQuery.ajax({
 
 
 
-//////////////////
-// Buildings
-
-// Initialize buildings
-var building = initObject(building, 6);
 
 
 
 
-//////////////////
-// City
 
-// Initialize city
-var city = initObject(city, 1);
