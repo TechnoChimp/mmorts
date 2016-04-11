@@ -90,33 +90,6 @@ actionWindow.prototype = {
 
 //////////////////
 //
-// FUNCTIONS
-//
-//////////////////
-
-//////////////////
-// Function: windowScroll(page, _callback)
-
-function windowScroll(page, _callback) {
-	$('#window_layer').load('pages/gamesheets/'+page+'.html', function() {
-		$('.scrollbox').enscroll({
-				verticalTrackClass: 'track',
-				verticalHandleClass: 'handle',
-				drawScrollButtons: true,
-				scrollUpButtonClass: 'scroll-up',
-				scrollDownButtonClass: 'scroll-down'
-		});
-		if (typeof _callback !== 'undefined') {
-			_callback();
-		}
-	});
-}
-
-
-
-
-//////////////////
-//
 // CLICK EVENTS
 //
 //////////////////
