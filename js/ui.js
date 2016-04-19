@@ -68,7 +68,11 @@ actionWindow.prototype = {
 	newWindow: function(_callback) {
 		var page = this.page;
 		
-		$('#window_layer').load('pages/gamesheets/'+page+'.html', function() {
+		// Get window count from #window_layer to set appropriate z-index for new window.
+		var windowCount = $('#window_layer').children().length;
+		
+		$('#window_layer').append('<div id="'+page+'"></div>');
+		$('#window_layer div#'+page).load('pages/gamesheets/'+page+'.html', function() {
 		$('.scrollbox').enscroll({
 				verticalTrackClass: 'track',
 				verticalHandleClass: 'handle',
@@ -76,6 +80,9 @@ actionWindow.prototype = {
 				scrollUpButtonClass: 'scroll-up',
 				scrollDownButtonClass: 'scroll-down'
 		});
+		
+		// Bring window to the front
+		$('#window_layer div#'+page).children().css({"z-index":+windowCount+1});
 		
 		// Run callback if required
 			if (_callback) {
@@ -98,7 +105,7 @@ actionWindow.prototype = {
 // Click Event: Close Action Window
 
 $('#game').on('click', '#windowClose', function() {
-	$('#window_layer').empty();
+	$(this).parent().parent().remove();
 });
 
 
@@ -108,13 +115,17 @@ $('#game').on('click', '#windowClose', function() {
 // Click Event: Inventory
 
 // Create new inventory action window
-$('#game').on('click', '#inventory', function() {
-	invWindow = new actionWindow('', '', '', 'inventory');
-	invWindow.newWindow(function() {
-		for (var i = 0; i < 9; i++) {
-			inv[i].getSlot();
-		}
-	});
+$('#game').on('click', '#invButton', function() {
+	// Check if inventory window is already open
+	if (!$('#inventory').length) {
+		// Inventory window is not yet open - open it now
+		invWindow = new actionWindow('', '', '', 'inventory');
+		invWindow.newWindow(function() {
+			for (var i = 0; i < 9; i++) {
+				inv[i].getSlot();
+			}
+		});
+	}
 });
 
 
@@ -142,9 +153,12 @@ $('#charimage').click(function() {
 
 // Create new quest journal window
 $('#game').on('click', '#journal', function() {
-	journalWindow = new actionWindow('', '', '', 'questwindow');
-	journalWindow.newWindow();
-	$('#questWindow').on('click', '.button', function() {
-		console.log('Accept button clicked.');
-	});
+	if (!$('#questjournal').length) {
+		journalWindow = new actionWindow('', '', '', 'questjournal');
+		journalWindow.newWindow(function() {
+			for (i = 0; i < questJournal.length; i++) {
+				questJournal[i].displayQuest();
+			}
+		});
+	}
 });

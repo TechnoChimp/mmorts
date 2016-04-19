@@ -52,21 +52,10 @@ var city = initObject(city, 1);
 
 
 //////////////////
-// Quest System
-
-// Initialize quest and quest goal as an empty array
-// Quests and goals will be added as needed
-var questList = [];
-var questGoalList = [];
-
-
-
-
-//////////////////
 // Inventory
 
 // Initialize player inventory
-var inv = initObject(invSlot, 9);
+var inv = initObject(invSlot, 60);
 
 // Get inventory data from API and load into objects
 jQuery.ajax({
@@ -86,20 +75,75 @@ jQuery.ajax({
 					// Set the data for the current slot
 					inv[slot].setSlot(qty, name, desc, img);
 				}
-				
-				
 			},
-			error : function(jqXHR, textStatus, errorThrown) {
+			error: function(jqXHR, textStatus, errorThrown) {
 			},
-			
 			timeout: 120000,
 		});
 
 
 
 
+//////////////////
+// Items
+
+// Initialize items as an empty array
+// Items will store all item objects in the game that are not already an inventory object
+var items = [];
 
 
 
 
+//////////////////
+// Quest System
 
+// Initialize quest journal
+var questJournal = [];
+
+jQuery.ajax({
+			url: "api/game/quest",
+			type: "GET",
+			contentType: 'application/json; charset=utf-8',
+			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
+			success: function(resultData) {
+				var quests = JSON.parse(resultData);
+				
+				
+				// Loop through each quest in result data
+				for (i = 0; i < quests.length; i++) {
+					var type = quests[i].type;
+					var title = quests[i].title;
+					var description = quests[i].description;
+					var status = quests[i].status;
+					var steps = quests[i].steps;
+					var rewards = quests[i].rewards;
+					var questItems = []; // Temporary array to hold each items[] indexed item
+					var questSteps = []; // Temporary array to hold each quest step
+
+					// Create invSlot objects for each reward and add to items array
+					for (j = 0; j < Object.keys(rewards).length; j++) {
+						// Get number of items already in items array
+						// New item index will be this same number since index begins with 0 and length begins with 1
+						var itemIndex = items.length;
+
+						// Combine image and sprite information
+						var sprite = rewards[j].image.split('.', 1)+'-'+rewards[j].sprite;
+
+						items[itemIndex] = new invSlot('', rewards[j].quantity, rewards[j].object_name, rewards[j].object_desc, sprite);
+						questItems[j] = items[itemIndex];
+					}
+					
+					// Create questStep objects for each quest step and add to questSteps array
+					for (j = 0; j < Object.keys(steps).length; j++) {
+						questSteps[j] = steps[j];
+					}
+					
+					// Create quest object for each quest and add to questJournal array
+					questJournal[i] = new quest(type, title, description, questItems, status, questSteps, i);
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				
+			},
+			timeout: 120000
+});

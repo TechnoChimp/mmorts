@@ -77,7 +77,7 @@ div#journal {
 
 /* Inventory */
 
-div#inventory {
+div#invButton {
 	width:60px;
 	height:60px;
 	background:url("../img/inventory_icon.png");
@@ -225,6 +225,18 @@ div#windowContent ul {
 	background:url('../img/window2_corner.png') top right;
 	z-index:1;
 }
+.corner-se {
+	width:90px;
+	height:90px;
+	background:url('../img/window2_corner.png') bottom right;
+	z-index:1;
+}
+.corner-sw {
+	width:90px;
+	height:90px;
+	background:url('../img/window2_corner.png') bottom left;
+	z-index:1;
+}
 
 /* Window Close */
 
@@ -236,8 +248,11 @@ div#windowContent ul {
 	width:24px;
 	border-radius:100%;
 /* border and x-index temporary - remove after replacing building windows */
-	border: solid 1px black;
     z-index: 1;
+}
+
+.closeImg {
+	background:url('../img/close.png');
 }
 
 
@@ -435,10 +450,10 @@ div.tile {
 }
 
 /******************
- * Quest Window
+ * Scroll Window
  *****************/
 
-#questWindow {
+#scrollWindow {
 	display:inline-block;
 	position:absolute;
 /* Positioning Temporary for Testing */
@@ -449,11 +464,11 @@ div.tile {
 	background:url('../img/window.png');
 }
 
-#questWindow * {
+#scrollWindow * {
 	cursor:default;
 }
 
-#questWindow .title{
+#scrollWindow .title{
 	margin:0;
 	position:absolute;
 	top:14px;
@@ -469,22 +484,12 @@ div.tile {
 	text-shadow:-2px 2px lightskyblue;
 }
 
-
-
-#questWindow .questContent-head, #questWindow .questContent-foot {
-	position:absolute;
+.scrollContent {
 	width:238px;
-	background:url('../img/window.png')  -274px 0 no-repeat;
-	z-index:1;
+	height:337px;
 }
 
-#questWindow .questContent-head {
-	top:50px;
-	left:8px;
-	height:35px;
-}
-
-#questWindow .questContent .quest {
+.scrollContent .sectionTitle {
 	margin:10px 0;
 	padding:0 15px;
 	font-size:14pt;
@@ -492,49 +497,42 @@ div.tile {
 	font-weight:bold;
 }
 
-#questWindow .questContent{
-	width:238px;
-	height:337px;
-}
-
-#questWindow .questContent p {
+.scrollContent p {
 	margin-top:10px;
 	padding:15px;
 	padding-top:0;
 	font-size:12px;
 }
 
-#questWindow .questContent-foot{
-	bottom:12px;
-	left:8px;
-	height:20px;
-	background-position:-274px -343px;
-}
-
-#questWindow .scrollbox{
+.scrollbox{
 	position:relative;
 	top:50px;
 	left:8px;
 	width:262px;
 	height:312px;
 	padding:25px 0;
-	background:url('../img/window.png') -274px 0 no-repeat;
 	overflow:auto;
 }
 
-#questWindow .track {
+.standardBg {
+	height:342px;
+	padding:10px 0;
+	background:url('../img/window.png') -512px 0 no-repeat;
+}
+
+.track {
 	width:22px;
 	background:url('../img/window.png') -773px 0 no-repeat;
 }
 
-#questWindow .handle {
+.handle {
 	width:16px;
 	margin-left:3px;
 	background:url('../img/window.png') -795px 0 no-repeat;
 	cursor:default;
 }
 
-#questWindow .handle .top, #questWindow .handle .bottom {
+.handle .top, .handle .bottom {
     position: absolute;
     left: 0;
     width: 16px;
@@ -542,40 +540,93 @@ div.tile {
     background: url('../img/window.png') no-repeat;
 }
 
-#questWindow .handle .top {
+.handle .top {
     top: 0;
     background-position:-795px 0;
 }
 
-#questWindow .handle .bottom {
+.handle .bottom {
     bottom: 0;
     width: 16px;
     height: 7px;
     background-position:-795px -311px;
 }
 
-#questWindow .scroll-up, #questWindow .scroll-down {
+.scroll-up, .scroll-down {
     width: 22px;
     height: 22px;
 }
 
-#questWindow .scroll-up {
+.scroll-up {
     background: url('../img/window.png') -274px -391px no-repeat;
 }
 
-#questWindow .scroll-up:hover {
+.scroll-up:hover {
     background-position: -296px -391px;
 }
 
-#questWindow .scroll-down {
+.scroll-down {
     background: url('../img/window.png') -318px -391px no-repeat;
 }
 
-#questWindow .scroll-down:hover {
+.scroll-down:hover {
     background-position: -340px -391px;
 }
 
-#questWindow .rewards p {
+.button {
+	margin:30px auto;
+	width:88px;
+	height:27px;
+	background: url('../img/window.png') -274px -363px no-repeat;
+	margin-bottom:25px;
+}
+
+.button p {
+	text-align:center;
+	color:ivory;
+	font-size:14pt;
+	font-variant:small-caps;
+	font-weight:bold;
+	line-height:27px;
+}
+
+/* Scroll Window - Quest */
+
+#scrollWindow .questBg {
+	height:312px;
+	padding:25px 0;
+	background:url('../img/window.png') -274px 0 no-repeat;
+}
+
+#scrollWindow .questContent-head, #scrollWindow .questContent-foot {
+	position:absolute;
+	width:238px;
+	background:url('../img/window.png')  -274px 0 no-repeat;
+	z-index:1;
+}
+
+#scrollWindow .questContent-head {
+	top:50px;
+	left:8px;
+	height:35px;
+}
+
+#scrollWindow .questContent .quest {
+	margin:10px 0;
+	padding:0 15px;
+	font-size:14pt;
+	font-variant:small-caps;
+	font-weight:bold;
+}
+
+#scrollWindow .questContent-foot{
+	bottom:12px;
+	left:8px;
+	height:20px;
+	background-position:-274px -343px;
+}
+
+#scrollWindow .rewards p {
 	text-align:center;
 	font-size:12pt;
 	font-variant:small-caps;
@@ -583,7 +634,7 @@ div.tile {
 	font-weight:bold;
 }
 
-#questWindow .rewards .item {
+#scrollWindow .rewards div {
 	display:inline-flex;
 	margin-left:10px;
 	margin-bottom:10px;
@@ -600,163 +651,14 @@ div.tile {
 	justify-content:flex-end;
 }
 
-#questWindow .button {
-	margin:30px auto;
-	width:88px;
-	height:27px;
-	background: url('../img/window.png') -274px -363px no-repeat;
-	margin-bottom:25px;
-}
+/* Scroll Window - Inventory */
 
-#questWindow .button p {
-	text-align:center;
-	color:ivory;
-	font-size:14pt;
-	font-variant:small-caps;
-	font-weight:bold;
-	line-height:27px;
-}
-
-/******************
- * Inventory Sheet
- *****************/
-
-#invSheet {
-	display:inline-block;
-	position:relative;
-/* Positioning Temporary for Testing */
-	top:100px;
-	left:400px;
-	width:274px;
-	height:424px;
-	background:url('../img/window.png');
-}
-
-#invSheet * {
-	cursor:default;
-}
-
-#invSheet .title{
-	margin:0;
-	position:absolute;
-	top:14px;
-	left:88px;
-	width:100px;
-	height:14px;
-	text-align:center;
-	color:midnightblue;
-	font-size:11pt;
-	font-variant:small-caps;
-	font-weight:bold;
-	line-height:14px;
-	text-shadow:-2px 2px lightskyblue;
-}
-
-#invSheet .close {
-	position:absolute;
-	top:0px;
-	right:5px;
-	height:24px;
-	width:24px;
-	border-radius:100%;
-}
-
-#invSheet .invContent-head, #invSheet .invContent-foot {
-	position:absolute;
-	width:238px;
-	background:url('../img/window.png')  -512px 0 no-repeat;
-	z-index:1;
-}
-
-#invSheet .invContent-head {
-	top:50px;
-	left:8px;
-	height:10px;
-	
-}
-
-#invSheet .invContent{
-	width:238px;
-	height:337px;
-}
-
-#invSheet .invContent-foot{
-	bottom:12px;
-	left:8px;
-	height:10px;
-	background-position:-512px -353px;
-}
-
-#invSheet .scrollbox{
-	position:relative;
-	top:50px;
-	left:8px;
-	width:262px;
-	height:342px;
-	padding:10px 0;
-	background:url('../img/window.png') -512px 0 no-repeat;
-	overflow:auto;
-}
-
-#invSheet .track {
-	width:22px;
-	background:url('../img/window.png') -773px 0 no-repeat;
-}
-
-#invSheet .handle {
-	width:16px;
-	margin-left:3px;
-	background:url('../img/window.png') -795px 0 no-repeat;
-	cursor:default;
-}
-
-#invSheet .handle .top, #invSheet .handle .bottom {
-    position: absolute;
-    left: 0;
-    width: 16px;
-    height: 7px;
-    background: url('../img/window.png') no-repeat;
-}
-
-#invSheet .handle .top {
-    top: 0;
-    background-position:-795px 0;
-}
-
-#invSheet .handle .bottom {
-    bottom: 0;
-    width: 16px;
-    height: 7px;
-    background-position:-795px -311px;
-}
-
-#invSheet .scroll-up, #invSheet .scroll-down {
-    width: 22px;
-    height: 22px;
-}
-
-#invSheet .scroll-up {
-    background: url('../img/window.png') -274px -391px no-repeat;
-}
-
-#invSheet .scroll-up:hover {
-    background-position: -296px -391px;
-}
-
-#invSheet .scroll-down {
-    background: url('../img/window.png') -318px -391px no-repeat;
-}
-
-#invSheet .scroll-down:hover {
-    background-position: -340px -391px;
-}
-
-#invSheet .inventory {
+#scrollWindow .inventory {
 	margin:15px auto;
 	margin-top:0;
 }
 
-#invSheet .inventory td {
+#scrollWindow .inventory td {
 	padding:0;
 	width:40px;
 	height:40px;
@@ -768,4 +670,69 @@ div.tile {
 	font-weight:bold;
 	text-align:right;
 	vertical-align:bottom;
+}
+
+/* Journal Window */
+
+#journalWindow {
+	position:relative;
+	display:inline-block;
+/* Positioning Temporary for Testing */
+	top:100px;
+	left:200px;	
+	width:780px;
+	height:500px;
+	font-weight:bold;
+	font-size:12pt;
+	color:#d4c3ac;
+	z-index:1;
+}
+
+#journalWindow .windowTitle {
+	position:absolute;
+	width:100%;
+	height:90px;
+	color:#d4c3ac;
+	text-align:center;
+	line-height:90px;
+	font-size:18pt;
+	text-shadow:#74695a -1px 1px;
+}
+
+#journalWindow .windowContent {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:-15px;
+	box-sizing:border-box;
+	padding:0 15px;
+	padding-bottom:60px;
+}
+
+#journalWindow .scrollbox{
+	position:relative;
+	top:69px;
+	left:8px;
+	width:750px;
+	height:312px;
+	overflow:auto;
+}
+
+#journalWindow .questButton {
+	display:inline-flex;
+	width:180px;
+	height:70px;
+	box-sizing:border-box;
+	background:url('../img/button.png');
+	font-size:10pt;
+	font-weight:normal;
+	vertical-align:middle;
+	align-items:center;
+	justify-content:center;
+	padding:0 20px;
+	z-index:1;
+}
+
+#journalWindow .questButton:hover, #journalWindow .questButtonActive{
+	background-position:bottom;
 }
