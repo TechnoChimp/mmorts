@@ -68,25 +68,34 @@ quest.prototype = {
 		var title = this.title;
 		var description = this.description;
 		var rewards = this.rewards;
+		var steps = this.steps;
 		
 		var questWindow = new actionWindow('', '', '', 'questwindow');
-		questWindow.newWindow(function() {
-			// After window loads, fill data into window (Maybe update window object to accept title and data input)
-			$('#questwindow .title').html(type + ' Quest');
-			$('#questwindow .sectionTitle').html(title);
-			$('#questwindow .sectionTitle').after('<p>'+description+'</p>');
-			
-			// Loop through rewards array and display each reward
-			var rewardLength = rewards.length;
-			for (var i = 0; i < rewardLength; i++) {
-				var sheet = rewards[i].img;
-				
-				$('#questwindow .rewards').append('<div class="item">'+rewards[i].qty+'</div>');
-				$('#questwindow .item').last().addClass(rewards[i].img.split('-', 1)+' '+rewards[i].img);
-			}
-			
-		});
 		
+		// Only allow one quest window open at a time
+		if (!$('#questwindow').length) {
+			questWindow.newWindow(function() {
+				// After window loads, fill data into window (Maybe update window object to accept title and data input)
+				$('#questwindow .title').html(type + ' Quest');
+				$('#questwindow .sectionTitle').html(title);
+				$('#questwindow .sectionTitle').after('<p>'+description+'</p>');
+				
+				// Loop through steps array and display each step
+				var stepLength = steps.length;
+				for (var i = 0; i < stepLength; i++) {
+					$('#questwindow .steps ul').append('<li>'+steps[i].step_title+'</li>');
+				}
+				
+				// Loop through rewards array and display each reward
+				var rewardLength = rewards.length;
+				for (var i = 0; i < rewardLength; i++) {
+					var sheet = rewards[i].img;
+					
+					$('#questwindow .rewards').append('<div class="item">'+rewards[i].qty+'</div>');
+					$('#questwindow .item').last().addClass(rewards[i].img.split('-', 1)+' '+rewards[i].img);
+				}
+			});
+		}
 	},
 	
 	// setProgress method will set the quest goal progress

@@ -1,0 +1,177 @@
+<div id="buildingWindow">
+	<div class="window-nw"></div>
+	<div class="window-ne"></div>
+	<div class="window-se"></div>
+	<div class="window-sw"></div>
+	<div class="window-nw corner-nw"></div>
+	<div class="window-ne corner-ne"></div>
+	<div class="window-se corner-se"></div>
+	<div class="window-sw corner-sw"></div>
+	<div id="windowClose" class="closeImg"></div>
+	<div class="windowTitle">
+		City Hall
+	</div>
+	<div class="windowContent">
+		<div class="col1">
+				<h3>MOTD</h3>
+				<div class="scrollbox">
+					<div class="scrollContent">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse leo neque, vehicula vel blandit id, viverra non libero. Vivamus faucibus, turpis at pellentesque fringilla, sem metus fringilla enim, in ornare mi leo eu ligula. Aenean eget neque vitae erat imperdiet pellentesque. Morbi porttitor eu purus eget laoreet. Donec ipsum eros, cursus a ornare in, congue at lacus. Duis sed hendrerit erat, ultricies placerat massa. Sed sit amet nisi euismod, laoreet sapien quis, facilisis orci. Sed tempor eros accumsan nibh fringilla, at iaculis elit tempus. Mauris imperdiet mauris sed nisi malesuada sagittis. Suspendisse potenti. Nulla sit amet nisi nec arcu fringilla vehicula.</p>
+					</div>
+				</div>
+				<br />
+				<h3>Attacks</h3>
+				<table>
+					<thead>
+						<tr>
+							<td>Type</td>
+							<td>City</td>
+							<td>Time Remaining (hh:mm)</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Incoming</td>
+							<td>Derpville</td>
+							<td>4:25</td>
+						</tr>
+						<tr>
+							<td>Outgoing</td>
+							<td>Rivertown</td>
+							<td>3:37</td>
+						</tr>
+						<tr>
+							<td>Outgoing</td>
+							<td>Desertplace</td>
+							<td>5:33</td>
+						</tr>
+						<tr>
+							<td>Outgoing</td>
+							<td>Fishingcity</td>
+							<td>13:57</td>
+						</tr>
+						<tr>
+							<td>Outgoing</td>
+							<td>Randomtown</td>
+							<td>23:17</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col2">
+				<h3>Citizens</h3>
+				<table id="citizens" class="compact display">
+					<thead>
+						<tr>
+							<td>Citizen</td>
+							<td>Class</td>
+							<td>Joined</td>
+							<td>Rank</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Alfred</td>
+							<td>Trader</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>Batman</td>
+							<td>Bat</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>Leonardo</td>
+							<td>Commander</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>BobTheBuilder</td>
+							<td>Builder</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>DoobieSmoker</td>
+							<td>Anarchist</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>CincoTheGuyO</td>
+							<td>Trader</td>
+							<td>01/01/2016</td>
+							<td>President</td>
+						</tr>
+						<tr>
+							<td>BigMackin</td>
+							<td>Trader</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>WhatTheD</td>
+							<td>Trader</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>DerpFace</td>
+							<td>Tool</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>SalmonElbow</td>
+							<td>Trader</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>IHartTwilite</td>
+							<td>Twat</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>BongWater</td>
+							<td>Trader</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>Zoltan</td>
+							<td>Builder</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>Geoff</td>
+							<td>Knight</td>
+							<td>01/01/2016</td>
+							<td>Citizen</td>
+						</tr>
+						<tr>
+							<td>BigLebowsky</td>
+							<td>Trader</td>
+							<td>01/01/2016</td>
+							<td>Dude</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function () {
+		$('#citizens').DataTable({
+			searching:false,
+			lengthChange:false,
+			pageLength:8
+		});
+	});
+</script>

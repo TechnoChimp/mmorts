@@ -122,6 +122,7 @@ city.prototype = {
 
 // Click capitol building (will be expanded to consume the click of any building, using just the capitol for testing)
 $('#game').on('click', '.tile', function() {
-	var buildingWindow = new actionWindow('large', this.id);
-	buildingWindow.displayWindow();
+	var page = this.id.replace(' ','').toLowerCase();
+	var buildingWindow = new actionWindow('', '', '', page);
+	buildingWindow.newWindow();
 });

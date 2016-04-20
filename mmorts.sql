@@ -40,6 +40,25 @@ CREATE TABLE IF NOT EXISTS `characters` (
 -- Data exporting was unselected.
 
 
+-- Dumping structure for table mmorts.character_quest
+CREATE TABLE IF NOT EXISTS `character_quest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `char_id` int(11) NOT NULL,
+  `quest_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `char_id` (`char_id`),
+  KEY `quest_id` (`quest_id`),
+  KEY `status_id` (`status_id`),
+  CONSTRAINT `FK_character_quest_characters` FOREIGN KEY (`char_id`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_character_quest_quest` FOREIGN KEY (`quest_id`) REFERENCES `quest` (`id`),
+  CONSTRAINT `FK_character_quest_quest_status` FOREIGN KEY (`status_id`) REFERENCES `quest_status` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
 -- Dumping structure for table mmorts.cities
 CREATE TABLE IF NOT EXISTS `cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -90,12 +109,40 @@ CREATE TABLE IF NOT EXISTS `city_map_tiles` (
 -- Data exporting was unselected.
 
 
+-- Dumping structure for table mmorts.goal
+CREATE TABLE IF NOT EXISTS `goal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `goal_type_id` int(11) NOT NULL,
+  `object_id` int(11) NOT NULL,
+  `quantity` int(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `goal_type_id` (`goal_type_id`),
+  KEY `object_id` (`object_id`),
+  CONSTRAINT `FK_goal_goal_type` FOREIGN KEY (`goal_type_id`) REFERENCES `goal_type` (`id`),
+  CONSTRAINT `FK_goal_object` FOREIGN KEY (`object_id`) REFERENCES `object` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.goal_type
+CREATE TABLE IF NOT EXISTS `goal_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
 -- Dumping structure for table mmorts.image
 CREATE TABLE IF NOT EXISTS `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE latin1_general_ci NOT NULL,
   `filename` varchar(32) COLLATE latin1_general_ci NOT NULL,
-  `img_type_id` int(11) NOT NULL,
+  `img_type_id` int(11),
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `filename` (`filename`),
@@ -111,7 +158,6 @@ CREATE TABLE IF NOT EXISTS `image` (
 CREATE TABLE IF NOT EXISTS `img_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(16) COLLATE latin1_general_ci NOT NULL,
-  `sub_type` varchar(16) COLLATE latin1_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
@@ -148,6 +194,155 @@ CREATE TABLE IF NOT EXISTS `item` (
   UNIQUE KEY `name` (`name`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.object
+CREATE TABLE IF NOT EXISTS `object` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(16) NOT NULL,
+  `description` varchar(256) NOT NULL,
+  `obj_type_id` int(11) NOT NULL,
+  `sprite_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `id` (`id`),
+  KEY `obj_type_id` (`obj_type_id`),
+  KEY `image_id` (`sprite_id`),
+  CONSTRAINT `FK_object_obj_type` FOREIGN KEY (`obj_type_id`) REFERENCES `obj_type` (`id`),
+  CONSTRAINT `FK_object_sprite` FOREIGN KEY (`sprite_id`) REFERENCES `sprite` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.obj_data
+CREATE TABLE IF NOT EXISTS `obj_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `obj_id` int(11) NOT NULL,
+  `field_id` int(11) NOT NULL,
+  `value` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `obj_id` (`obj_id`),
+  KEY `field_id` (`field_id`),
+  CONSTRAINT `FK_obj_data_obj_field` FOREIGN KEY (`field_id`) REFERENCES `obj_field` (`id`),
+  CONSTRAINT `FK_obj_data_object` FOREIGN KEY (`obj_id`) REFERENCES `object` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.obj_field
+CREATE TABLE IF NOT EXISTS `obj_field` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `field` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Column 1` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.obj_type
+CREATE TABLE IF NOT EXISTS `obj_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.quest
+CREATE TABLE IF NOT EXISTS `quest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(32) NOT NULL,
+  `description` varchar(256) NOT NULL,
+  `quest_type_id` int(11) NOT NULL,
+  `first_step_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`),
+  KEY `id` (`id`),
+  KEY `quest_type_id` (`quest_type_id`),
+  KEY `first_step_id` (`first_step_id`),
+  CONSTRAINT `FK_quest_quest_step` FOREIGN KEY (`first_step_id`) REFERENCES `quest_step` (`id`),
+  CONSTRAINT `FK_quest_quest_type` FOREIGN KEY (`quest_type_id`) REFERENCES `quest_type` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.quest_reward
+CREATE TABLE IF NOT EXISTS `quest_reward` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quest_id` int(11) NOT NULL,
+  `object_id` int(11) NOT NULL,
+  `qty` int(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `quest_id` (`quest_id`),
+  KEY `object_id` (`object_id`),
+  CONSTRAINT `FK_quest_reward_quest` FOREIGN KEY (`quest_id`) REFERENCES `quest` (`id`),
+  CONSTRAINT `FK_quest_reward_object` FOREIGN KEY (`object_id`) REFERENCES `object` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.quest_status
+CREATE TABLE IF NOT EXISTS `quest_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.quest_step
+CREATE TABLE IF NOT EXISTS `quest_step` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(32) NOT NULL,
+  `goal_id` int(11) NOT NULL,
+  `next_step_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `goal_id` (`goal_id`),
+  KEY `next_step_id` (`next_step_id`),
+  CONSTRAINT `FK_quest_step_goal` FOREIGN KEY (`goal_id`) REFERENCES `goal` (`id`),
+  CONSTRAINT `FK_quest_step_quest_step` FOREIGN KEY (`next_step_id`) REFERENCES `quest_step` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.quest_type
+CREATE TABLE IF NOT EXISTS `quest_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table mmorts.sprite
+CREATE TABLE IF NOT EXISTS `sprite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(16) NOT NULL,
+  `image_id` int(1) NOT NULL,
+  `sprite` varchar(8) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `id` (`id`),
+  KEY `image_id` (`image_id`),
+  CONSTRAINT `FK_sprite_image` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 
@@ -193,6 +388,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` varchar(1) COLLATE latin1_general_ci NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
