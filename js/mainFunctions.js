@@ -13,6 +13,9 @@ function loginAction() {
 		localStorage.clear();
 		$('#auth').empty();
 		$('#auth').load('templates/login.html');
+		
+		// Redirect user to home page
+		$('#content').load('pages/home.html');
 	});
 }
 

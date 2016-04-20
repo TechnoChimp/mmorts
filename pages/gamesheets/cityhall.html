@@ -16,7 +16,7 @@
 				<h3>MOTD</h3>
 				<div class="scrollbox">
 					<div class="scrollContent">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse leo neque, vehicula vel blandit id, viverra non libero. Vivamus faucibus, turpis at pellentesque fringilla, sem metus fringilla enim, in ornare mi leo eu ligula. Aenean eget neque vitae erat imperdiet pellentesque. Morbi porttitor eu purus eget laoreet. Donec ipsum eros, cursus a ornare in, congue at lacus. Duis sed hendrerit erat, ultricies placerat massa. Sed sit amet nisi euismod, laoreet sapien quis, facilisis orci. Sed tempor eros accumsan nibh fringilla, at iaculis elit tempus. Mauris imperdiet mauris sed nisi malesuada sagittis. Suspendisse potenti. Nulla sit amet nisi nec arcu fringilla vehicula.</p>
+						<p></p>
 					</div>
 				</div>
 				<br />
@@ -63,115 +63,57 @@
 				<table id="citizens" class="compact display">
 					<thead>
 						<tr>
-							<td>Citizen</td>
+							<td>Name</td>
 							<td>Class</td>
 							<td>Joined</td>
 							<td>Rank</td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Alfred</td>
-							<td>Trader</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>Batman</td>
-							<td>Bat</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>Leonardo</td>
-							<td>Commander</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>BobTheBuilder</td>
-							<td>Builder</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>DoobieSmoker</td>
-							<td>Anarchist</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>CincoTheGuyO</td>
-							<td>Trader</td>
-							<td>01/01/2016</td>
-							<td>President</td>
-						</tr>
-						<tr>
-							<td>BigMackin</td>
-							<td>Trader</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>WhatTheD</td>
-							<td>Trader</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>DerpFace</td>
-							<td>Tool</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>SalmonElbow</td>
-							<td>Trader</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>IHartTwilite</td>
-							<td>Twat</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>BongWater</td>
-							<td>Trader</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>Zoltan</td>
-							<td>Builder</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>Geoff</td>
-							<td>Knight</td>
-							<td>01/01/2016</td>
-							<td>Citizen</td>
-						</tr>
-						<tr>
-							<td>BigLebowsky</td>
-							<td>Trader</td>
-							<td>01/01/2016</td>
-							<td>Dude</td>
-						</tr>
-					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 </div>
+
 <script>
 	$(document).ready(function () {
-		$('#citizens').DataTable({
-			searching:false,
-			lengthChange:false,
-			pageLength:8
-		});
+		console.log(cityId);
+		jQuery.ajax({
+			url: "api/game/city/"+cityId+"/cityhall",
+			type: "GET",
+			contentType: 'application/json; charset=utf-8',
+			headers: {'Authorization': 'Basic ' + localStorage.getItem("userAuth")},
+			success: function(resultData) {
+				// Convert data to javascript object
+				var cityData = JSON.parse(resultData);
+				
+				//////
+				// MOTD
+				
+				$('.scrollContent').append(cityData.motd);
+				
+				// Setup data table
+				var table = $('#citizens').DataTable({
+					searching:false,
+					lengthChange:false,
+					dataLength:8
+				});
+				
+				// Load data into table
+				for (var i = 0; i < cityData.members.length; i++) {
+					table.row.add([
+						cityData.members[i].name,
+						cityData.members[i].class,
+						cityData.members[i].joined.split(' ', 1),
+						cityData.members[i].rank
+					]);
+				}
+				table.draw();
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+			},
+			
+			timeout: 120000,
+		});	
 	});
 </script>

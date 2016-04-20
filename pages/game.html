@@ -35,13 +35,8 @@
 					$('#game').empty();
 					$('#game').load('pages/gamesheets/charactercreation.html');
 				} else {
-				
-					// Set the characterId and cityID into localStorage
-					//----------Replace this with a player object
-					localStorage.setItem('charId', $(this).attr('charId'));
-					//----------Replace this with a city object
-					localStorage.setItem('cityId', $(this).attr('cityId'));
-					var cityId = localStorage.getItem('city_id');
+					// Define global cityId variable
+					cityId = $(this).attr('cityId');
 					
 					// Load data into city and building objects
 					// Get inventory data from API and load into objects
@@ -63,6 +58,9 @@
 							// Data is structured as [0:{Building1 Data}, 1:{Building2 Data}, ...etc, city_name: "", bg_img: ""]
 							// At this time we're returning building plus two additional values for the city, so building count will
 							//   be the number of keys in cityData - 2.
+							// Note: this structure should be updated to be:
+							//   {city_name:"val", bg_img:"val", buildings:[0:"data", 1:"data",etc...]}
+							//   Then building count will be cityData.buildings.length
 							var buildingCount = Object.keys(cityData).length - 2;
 	
 							// Loop through the buildings and set the values of the building objects.

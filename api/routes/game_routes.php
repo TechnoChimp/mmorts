@@ -43,7 +43,7 @@ $app->get('/game/test', function(RequestInterface $request, ResponseInterface $r
 $app->get('/game/character', function(RequestInterface $request, ResponseInterface $response) use($app) {
 	// Pull username from auth string and pull characters associated with that username
 	$username = $_SERVER['PHP_AUTH_USER'];
-	$query = "SELECT characters.id as char_id, characters.name as char_name, image.filename as char_img, characters.level as char_level, cities.id as city_id, cities.name as city_name FROM characters LEFT JOIN (users, cities) ON (users.id = characters.user_id AND cities.id = characters.city_id) LEFT JOIN image on characters.char_img_id = image.id WHERE users.username = '{$username}'";
+	$query = "SELECT c.id as char_id, c.name as char_name, i.filename as char_img, c.level as char_level, ci.id as city_id, ci.name as city_name FROM characters c JOIN users u on c.user_id = u.id JOIN image i on c.char_img_id = i.id JOIN city_character cc on cc.char_id = c.id JOIN cities ci on cc.city_id = ci.id WHERE u.username = '{$username}'";
 	
 	// Acquire database connection and perform query
 	global $pdo;
@@ -142,19 +142,31 @@ $app->get('/game/city/{id}', function(RequestInterface $request, ResponseInterfa
 
 
 //////////////////
-// GET /game/city/{id}/members
+// GET /game/city/{id}/cityhall
 
-// Get members of city with specified ID
-$app->get('/game/city/{id}/members', function(RequestInterface $request, ResponseInterface $response) use($app) {
+// Get city hall of city with specified ID
+$app->get('/game/city/{id}/cityhall', function(RequestInterface $request, ResponseInterface $response) use($app) {
 	// Get city ID from request
 	$id = $request->getAttribute('id');
 
-	$query = "SELECT a.name as char_name FROM characters a LEFT JOIN cities b ON a.city_id = b.id WHERE b.id = '{$id}'";
+	$query = "SELECT c.name as name, 'NotDefined' as class, cc.join_date as joined, cr.rank as rank FROM city_character cc JOIN characters c on cc.char_id = c.id JOIN cities ci on cc.city_id = ci.id JOIN city_rank cr on cc.rank_id = cr.id WHERE ci.id = '{$id}'; SELECT ci.motd as motd FROM cities ci WHERE ci.id = '{$id}'";
 	
 	// Acquire database connection and perform query
 	global $pdo;
 	$statement = $pdo->query($query);
-	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+	$members = $statement->fetchAll(PDO::FETCH_ASSOC);
+	$statement->nextRowset();
+	$motd = $statement->fetch(PDO::FETCH_ASSOC);
+	
+	// Add each city member to result
+	$memberNum = 0;
+	foreach ($members as $member) {
+		$result["members"][$memberNum] = $member;
+		$memberNum++;
+	}
+	
+	// Add MOTD to the result
+	$result += $motd;
 	
 	// Return data in JSON format
 	return json_encode($result);
@@ -302,19 +314,19 @@ $app->get('/game/quest', function(RequestInterface $request, ResponseInterface $
 // GET /game/user
 
 // Gathers user information for game initialization (move to new group after figuring out securing multiple groups)
-$app->get('/game/user', function(RequestInterface $request, ResponseInterface $response) use($app) {
-	// Get username and build query
-	$username = $_SERVER['PHP_AUTH_USER'];
-	$query = "SELECT characters.name as char_name, cities.name as city_name FROM characters JOIN users ON users.id = characters.user_id JOIN city_members ON characters.id = city_members.characer_id JOIN cities ON cities.id = city_members.city_id WHERE users.username = '{$username}'";
-
-	// Acquire database connection and perform query
-	global $pdo;
-	$statement = $pdo->query($query);
-	$result = $statement->fetch(PDO::FETCH_ASSOC);
-	
-	// Return data in JSON format
-	return json_encode($result);
-});
+//$app->get('/game/user', function(RequestInterface $request, ResponseInterface $response) use($app) {
+//	// Get username and build query
+//	$username = $_SERVER['PHP_AUTH_USER'];
+//	$query = "SELECT characters.name as char_name, cities.name as city_name FROM characters JOIN users ON users.id = characters.user_id JOIN city_members ON characters.id = city_members.characer_id JOIN cities ON cities.id = city_members.city_id WHERE users.username = '{$username}'";
+//
+//	// Acquire database connection and perform query
+//	global $pdo;
+//	$statement = $pdo->query($query);
+//	$result = $statement->fetch(PDO::FETCH_ASSOC);
+//	
+//	// Return data in JSON format
+//	return json_encode($result);
+//});
 
 
 
@@ -353,11 +365,30 @@ $app->post('/game/character', function(RequestInterface $request, ResponseInterf
 	$cityId = $result['city_id'];
 	
 	// Insert new character into DB
-	$query = "INSERT INTO characters (name, user_id, city_id, char_img_id, char_type_id, level, exp, silver) VALUES ('{$charName}', '{$userId}', '{$cityId}', '{$charImgId}', '0', '1', '0', '0')";
+	$query = "INSERT INTO characters (name, user_id, char_img_id, char_type_id, level, exp, silver) VALUES ('{$charName}', '{$userId}', '{$charImgId}', '0', '1', '0', '0')";
 	
 	try {
 		global $pdo;
-		$statement = $pdo->exec($query);
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+		
+		// New character added successfully
+		// Get user ID and add user to city
+		$charId = $pdo->lastInsertId();
+		
+		$query = "INSERT INTO city_character (char_id, city_id, rank_id) VALUES ('{$charId}', '{$cityId}', '1')";
+		
+		try {
+			global $pdo;
+			$statement = $pdo->exec($query);
+			
+		} catch(exception $e) {
+			$newResponse = $response->withStatus(409);
+			$body = $newResponse->getBody();
+			$body->write(json_encode($e));
+			return $newResponse;
+		}
+		
 	} catch(exception $e) {
 		$newResponse = $response->withStatus(409);
 		$body = $newResponse->getBody();
