@@ -35,8 +35,9 @@
 					$('#game').empty();
 					$('#game').load('pages/gamesheets/charactercreation.html');
 				} else {
-					// Define global cityId variable
+					// Define global cityId and charId variable
 					cityId = $(this).attr('cityId');
+					charId = $(this).attr('charId');
 					
 					// Load data into city and building objects
 					// Get inventory data from API and load into objects
@@ -89,7 +90,11 @@
 								for (var i = 0; i < 6; i++) {
 									building[i].getBuilding();
 								}
-							});						
+							});
+							
+							// Initialize quest and inventory systems
+							initInventory();
+							initQuest();					
 						},
 						error : function(jqXHR, textStatus, errorThrown) {
 						},
