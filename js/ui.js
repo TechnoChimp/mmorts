@@ -28,42 +28,6 @@ function actionWindow(size, title, content, page) {
 actionWindow.prototype = {
 	constructor: actionWindow,
 	
-	// displayWindow method will display the window on screen
-	displayWindow: function(_callback) {
-		// Pass object variables to local variables
-		var title = this.title;
-		var contentClass = this.size + 'Window'; // smallWindow, mediumWindow, largeWindow classes
-		var content = this.content;
-		
-		$('#window_layer').load('pages/gamesheets/window.html', function() {
-			$('#windowTitle').append(title);
-			$('#windowContent').addClass(contentClass);
-			$('#windowContent').append(content);
-			
-			//Position and show the action window
-			var windowHeight = ($('#windowTitle').outerHeight()/2)+$('#windowContent').outerHeight();
-			var windowXCenter = ($('#window_layer').outerWidth()/2)-($('#windowWrapper').outerWidth()/2);
-			var windowYCenter = ($('#game').outerHeight()/2)-(windowHeight/2)+($('#stageTitle').outerHeight()/2);
-			var contentXCenter = ($('#windowWrapper').outerWidth()/2)-($('#windowContent').outerWidth()/2);
-			var contentYCenter = ($('#windowTitle').outerHeight()/2);
-			var titleXCenter = ($('#windowWrapper').outerWidth()/2)-($('#windowTitle').outerWidth()/2);
-			var dataPadding = ($('#windowContent').outerWidth()-$('#windowContent').width())/2;
-			var closeXPosition = ($('#windowWrapper').outerWidth()-$('#windowContent').outerWidth())/2+(dataPadding);
-			var closeYPosition = $('#windowTitle').outerHeight();
-				
-			$('#windowWrapper').css({"left":windowXCenter,"top":windowYCenter,"height":windowHeight});
-			$('#windowTitle').css({"left":titleXCenter});
-			$('#windowContent').css({"left":contentXCenter,"top":contentYCenter});
-			$('#windowClose').css({"right":closeXPosition,"top":closeYPosition});
-			$('#windowWrapper').css({"visibility":"visible"});
-			
-			// Run callback if required
-			if (_callback) {
-				_callback();
-			}
-		});
-	},
-	
 	// newWindow method will display a new window on screen
 	newWindow: function(_callback) {
 		var page = this.page;
@@ -73,7 +37,7 @@ actionWindow.prototype = {
 		
 		$('#window_layer').append('<div id="'+page+'"></div>');
 		$('#window_layer div#'+page).load('pages/gamesheets/'+page+'.html', function() {
-		$('.scrollbox').enscroll({
+		$('div#'+page+' .scrollbox').enscroll({
 				verticalTrackClass: 'track',
 				verticalHandleClass: 'handle',
 				drawScrollButtons: true,
@@ -162,3 +126,26 @@ $('#game').on('click', '#journal', function() {
 		});
 	}
 });
+
+
+
+
+//////////////////
+// Click Event: Inventory Slot
+
+// Create new item window
+$('#game').on('click', '#inventory td', function() {
+	if(!$(this).hasClass("")) {
+		// Class is not empty, so item exists in this slot.
+		
+		// Get the inventory slot number from the id
+		var slot = $(this).attr('id').replace( /^\D+/g, '');
+
+		itemWindow = new actionWindow('', '', '', 'itemwindow');
+		itemWindow.newWindow(function() {
+			// Draw the item in this slot to the window
+			inv[slot].displayItem();
+		});
+	}
+});
+

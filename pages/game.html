@@ -49,11 +49,14 @@
 						success: function(resultData) {
 							// Convert response to array and pull city data
 							var cityData = JSON.parse(resultData);
+							console.log(cityData);
 							var cityName = cityData.city_name;
+							console.log(cityName);
 							var bgImg = cityData.bg_img;
 	
 							// Set the city object
 							city[0].setCity(cityName, bgImg);
+							console.log(city);
 							
 							// Determine building count by counting the number of keys and removing the number of non-building keys
 							// Data is structured as [0:{Building1 Data}, 1:{Building2 Data}, ...etc, city_name: "", bg_img: ""]

@@ -172,32 +172,32 @@ div#windowContent ul {
 	position:absolute;
 	top:0;
 	left:0;
-	width:50%;
-	height:50%;
+	width:51%;
+	height:51%;
 	background:url('../img/window2.png');
 }
 .window-ne {
 	position:absolute;
 	top:0;
 	right:0;
-	width:50%;
-	height:50%;
+	width:51%;
+	height:51%;
 	background:url('../img/window2.png') top right;
 }
 .window-se {
 	position:absolute;
 	bottom:0;
 	right:0;
-	width:50%;
-	height:50%;
+	width:51%;
+	height:51%;
 	background:url('../img/window2.png') bottom right;
 }
 .window-sw {
 	position:absolute;
 	bottom:0;
 	left:0;
-	width:50%;
-	height:50%;
+	width:51%;
+	height:51%;
 	background:url('../img/window2.png') bottom left;
 }
 .corner-nw {
@@ -455,7 +455,7 @@ div.tile {
 	cursor:default;
 }
 
-#scrollWindow .title{
+#scrollWindow .title {
 	margin:0;
 	position:absolute;
 	top:14px;
@@ -469,6 +469,13 @@ div.tile {
 	font-weight:bold;
 	line-height:14px;
 	text-shadow:-2px 2px lightskyblue;
+}
+
+#scrollWindow .itemImg {
+	width:40px;
+	height:40px;
+	margin:5px auto;
+	zoom:4;
 }
 
 .scrollContent {
@@ -631,6 +638,11 @@ div.tile {
 
 #scrollWindow .steps ul li:before {
 	content: "\2610";
+    margin-right: 5px;
+}
+
+#scrollWindow .steps .complete ul li:before {
+	content: "\2611";
     margin-right: 5px;
 }
 

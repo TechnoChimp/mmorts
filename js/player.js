@@ -28,8 +28,12 @@ item.prototype = {
 	constructor: item,
 	
 	// getItem method will return all details about item into a table(itemDetail)
-	getItem: function() {
-		console.log('Name: ' + this.name + '\nDesc: ' + this.desc + '\nImg: ' + this.img);
+	displayItem: function() {
+		var sheet = this.img.split('-', 1);
+		
+		$('#itemwindow .title').html(this.name);
+		$('#itemwindow .itemImg').addClass(sheet + " " + this.img);
+		$('#itemwindow .scrollContent').append("<p>"+this.desc+"</p>");
 	},
 	
 	// setItem method will set the variables in the item object

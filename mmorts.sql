@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `character_quest` (
   KEY `char_id` (`char_id`),
   KEY `quest_id` (`quest_id`),
   KEY `status_id` (`status_id`),
-  CONSTRAINT `FK_character_quest_characters` FOREIGN KEY (`char_id`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_character_quest_characters` FOREIGN KEY (`char_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_character_quest_quest` FOREIGN KEY (`quest_id`) REFERENCES `quest` (`id`),
   CONSTRAINT `FK_character_quest_quest_status` FOREIGN KEY (`status_id`) REFERENCES `quest_status` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `city_character` (
   KEY `char_id` (`char_id`),
   KEY `city_id` (`city_id`),
   KEY `rank_id` (`rank_id`),
-  CONSTRAINT `FK_city_character_characters` FOREIGN KEY (`char_id`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_city_character_characters` FOREIGN KEY (`char_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_city_character_cities` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
   CONSTRAINT `FK_city_character_city_rank` FOREIGN KEY (`rank_id`) REFERENCES `city_rank` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   KEY `id` (`id`),
   KEY `player_id` (`character_id`),
   KEY `item_id` (`item_id`),
-  CONSTRAINT `FK_inventory_characters` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`),
+  CONSTRAINT `FK_inventory_characters` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_inventory_item` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 

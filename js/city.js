@@ -86,6 +86,7 @@ city.prototype = {
 		// Load the city structure
 		$('#stage').load('pages/gamesheets/citymap.html', function() {
 			// Set the stage title
+			console.log(title);
 			$('#stageTitle .titleContent').html(title);
 			
 			//Show the map
